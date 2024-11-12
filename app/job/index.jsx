@@ -80,6 +80,7 @@ const index = () => {
                 marginTop: 10,
                 flexDirection: 'row',
                 justifyContent: 'space-between',
+                alignItems:"flex-end",
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.1,

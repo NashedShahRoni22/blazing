@@ -1,4 +1,3 @@
-import { View, Text } from "react-native";
 import React from "react";
 import { Stack } from "expo-router";
 import Colors from "../constants/Colors";
@@ -8,6 +7,7 @@ const RootLayout = () => {
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="login" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
         name="visa/index"
         options={{
@@ -41,6 +41,38 @@ const RootLayout = () => {
         }}
       />
       <Stack.Screen
+        name="ticket/index"
+        options={{
+          headerTitle: "Air Ticket",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="referral/index"
+        options={{
+          headerTitle: "Referral",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="wallet/index"
+        options={{
+          headerTitle: "Wallet",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="transection/index"
+        options={{
+          headerTitle: "Transection History",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
         name="coming_soon"
         options={{
           headerTitle: "Coming Soon",
@@ -48,7 +80,6 @@ const RootLayout = () => {
           headerTintColor: "white",
         }}
       />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
     </Stack>
   );
 };

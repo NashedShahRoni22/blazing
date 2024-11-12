@@ -15,11 +15,11 @@ const Home = () => {
     {
       image: Images.ticket,
       title: "Air Ticket",
-      link:"coming_soon"
+      link:"ticket"
     },
     {
       image: Images.house,
-      title: "Appartment",
+      title: "Properties",
       link:"appartment"
     },
     {
@@ -40,7 +40,7 @@ const Home = () => {
     {
       image: Images.referral,
       title: "Referral",
-      link:"coming_soon"
+      link:"referral"
     },
     {
       image: Images.faq,
@@ -94,7 +94,7 @@ const Home = () => {
             shadowRadius: 4,
             paddingHorizontal: 15,
           }}
-          // onPress={() => router.push("/login")}
+          onPress={() => router.push("/wallet")}
         >
           <Text style={{ color: 'black', fontSize: 12, fontWeight: '600' }}>Wallet</Text>
         </TouchableOpacity>

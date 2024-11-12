@@ -15,6 +15,7 @@ import skill from "@/assets/images/skill.png";
 import student from "@/assets/images/student.png";
 import tourist from "@/assets/images/tourist.png";
 import user from "@/assets/images/user.jpeg";
+import wallet from "@/assets/images/wallet.png";
 
 export default {
   logo,
@@ -33,5 +34,6 @@ export default {
   skill,
   student,
   tourist,
-  user
+  user,
+  wallet
 };
