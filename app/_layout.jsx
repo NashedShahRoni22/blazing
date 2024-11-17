@@ -17,6 +17,22 @@ const RootLayout = () => {
         }}
       />
       <Stack.Screen
+        name="country/[id]"
+        options={{
+          headerTitle: "Countries",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="university/[visa_id]/[id]"
+        options={{
+          headerTitle: "Universities",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
         name="appartment/index"
         options={{
           headerTitle: "Appartment",

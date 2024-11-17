@@ -1,74 +1,35 @@
 import { View, Text, SafeAreaView, FlatList } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
+import SplashScreen from "../../components/SplashScreen";
 
 const index = () => {
-  const DATA = [
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-    {
-      title: "Sales Executive (16 hours, Part time)",
-      location: "NSW, Australlia",
-      price: "25000$ to 35000$",
-    },
-  ];
+  const url = "https://nw71.tv/api/v1/job";
+  const [loader, setLoader] = useState(true); 
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.status === "success") {
+          setJobs(data?.data);
+        } else {
+          console.log("Something went wrong");
+        }
+      })
+      .finally(() => {
+        setLoader(false);
+      });
+  }, []);
   return (
     <SafeAreaView style={{ flex: 1, padding: 10 }}>
-      <FlatList
-        data={DATA}
+      {
+        loader ?
+        <SplashScreen/>
+        :
+        <FlatList
+        data={jobs}
         showsHorizontalScrollIndicator={false}
         renderItem={({ item }) => {
           return (
@@ -88,9 +49,9 @@ const index = () => {
               }}
             >
               <View>
-                <Text style={{ fontSize: 16, fontWeight: '600' }}>{item.title}</Text>
-                <Text style={{ color: '#808080', marginVertical: 5 }}>{item.location}</Text>
-                <Text style={{ fontSize: 16, fontWeight: '600' }}>${item.price}</Text>
+                <Text style={{ fontSize: 16, fontWeight: '600' }}>{item?.title}</Text>
+                <Text style={{ color: '#808080', marginVertical: 5 }}>{item?.area}</Text>
+                <Text style={{ fontSize: 16, fontWeight: '600' }}>${item?.salary}</Text>
               </View>
               <TouchableOpacity
                 activeOpacity={0.7}
@@ -116,6 +77,7 @@ const index = () => {
           );
         }}
       />
+      }
     </SafeAreaView>
   );
 };

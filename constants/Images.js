@@ -16,6 +16,8 @@ import student from "@/assets/images/student.png";
 import tourist from "@/assets/images/tourist.png";
 import user from "@/assets/images/user.jpeg";
 import wallet from "@/assets/images/wallet.png";
+import university from "@/assets/images/university.png";
+import country from "@/assets/images/country.png";
 
 export default {
   logo,
@@ -35,5 +37,7 @@ export default {
   student,
   tourist,
   user,
-  wallet
+  wallet,
+  university,
+  country
 };
