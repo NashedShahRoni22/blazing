@@ -11,13 +11,13 @@ const TabsLayout = () => {
       tabBarActiveTintColor: Colors.white,
       tabBarInactiveTintColor:Colors.white,
       tabBarStyle: {
-        height: 74,
+        height: 70,
         backgroundColor: Colors.primary,
       },
       tabBarLabelStyle: {
         fontSize: 12,
         fontWeight: "bold",
-        marginBottom: 10,
+        marginTop:4
       },
     }}
     >

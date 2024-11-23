@@ -112,7 +112,7 @@ const index = () => {
               case "Withdraw":
                 return "red";
               default:
-                return "gray"; // Default if status is not recognized
+                return "gray";
             }
           };
 
@@ -145,9 +145,9 @@ const index = () => {
                 >
                   <Text
                     style={{
-                      fontSize: 24,
+                      fontSize: 18,
                       fontWeight: "600",
-                      color: getStatusColor(item.status), // Use the function to set color
+                      color: getStatusColor(item.status),
                     }}
                   >
                     {item.status}
@@ -162,9 +162,9 @@ const index = () => {
                 </View>
                 <Text
                   style={{
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: "600",
-                    color: getStatusColor(item.status), // Use the function to set color
+                    color: getStatusColor(item.status),
                   }}
                 >
                   ${item.amount}

@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import {
-  View,
   Text,
-  StyleSheet,
   FlatList,
   TouchableOpacity,
   Image,
   SafeAreaView,
 } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import SplashScreen from "../../../components/SplashScreen";
 import Images from "../../../constants/Images";
 
@@ -20,7 +18,7 @@ const UniversityDetails = () => {
 
   useEffect(() => {
     if (visa_id && id) {
-      const fetchUniversityDetails = async () => {
+      const fetchUniversity = async () => {
         try {
           const response = await fetch(url);
           const data = await response.json();
@@ -32,7 +30,7 @@ const UniversityDetails = () => {
         }
       };
 
-      fetchUniversityDetails();
+      fetchUniversity();
     } else {
       // Handle case when visa_id or id is missing
       setLoading(false);
@@ -65,9 +63,7 @@ const UniversityDetails = () => {
                 padding: 10,
                 gap: 4,
               }}
-              onPress={() =>
-                router.push(`/university/${item?.visa_id}/${item?.id}`)
-              }
+              onPress={() => router.push(`/universityDetails/${item?.id}`)}
             >
               <Image
                 source={Images?.university}

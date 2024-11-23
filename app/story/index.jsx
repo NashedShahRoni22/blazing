@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import SplashScreen from "../../components/SplashScreen";
 import Images from "../../constants/Images";
+import { router } from "expo-router";
 
 const index = () => {
   const url = "https://nw71.tv/api/v1/success-story";
@@ -66,7 +67,7 @@ const index = () => {
                   activeOpacity={0.7}
                   style={{
                     backgroundColor: "#FF6347", // primary color (can change as needed)
-                    height: 25,
+                    height: 30,
                     justifyContent: "center",
                     alignItems: "center",
                     borderRadius: 25,
@@ -76,7 +77,7 @@ const index = () => {
                     shadowRadius: 4,
                     paddingHorizontal: 15,
                   }}
-                  // onPress={() => router.push("/login")}
+                  onPress={() => router.push(`/storyDetails/${item?.id}`)}
                 >
                   <Text
                     style={{ color: "white", fontSize: 12, fontWeight: "600" }}

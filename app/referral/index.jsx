@@ -133,7 +133,7 @@ const index = () => {
                 >
                   <Text
                     style={{
-                      fontSize: 24,
+                      fontSize: 18,
                       fontWeight: "600",
                       color: isPending ? "gray" : "green", // Set color based on status
                     }}
@@ -150,7 +150,7 @@ const index = () => {
                 </View>
                 <Text
                   style={{
-                    fontSize: 24,
+                    fontSize: 18,
                     fontWeight: "600",
                     color: isPending ? "gray" : "green", // Set color based on status
                   }}

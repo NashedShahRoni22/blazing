@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import SplashScreen from "../../components/SplashScreen";
+import { router } from "expo-router";
 
 const index = () => {
   const url = "https://nw71.tv/api/v1/job";
@@ -41,7 +42,7 @@ const index = () => {
                 marginTop: 10,
                 flexDirection: 'row',
                 justifyContent: 'space-between',
-                alignItems:"flex-end",
+                alignItems:"center",
                 shadowColor: '#000',
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.1,
@@ -57,7 +58,7 @@ const index = () => {
                 activeOpacity={0.7}
                 style={{
                   backgroundColor: '#FF6347', // primary color
-                  height: 25,
+                  height: 30,
                   justifyContent: 'center',
                   alignItems: 'center',
                   borderRadius: 25,
@@ -67,7 +68,7 @@ const index = () => {
                   shadowRadius: 4,
                   paddingHorizontal: 15,
                 }}
-                // onPress={() => router.push("/login")}
+                onPress={() => router.push(`/jobDetails/${item?.id}`)}
               >
                 <Text style={{ color: 'white', fontSize: 12, fontWeight: '600' }}>
                   View Details

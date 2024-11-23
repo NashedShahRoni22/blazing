@@ -33,9 +33,25 @@ const RootLayout = () => {
         }}
       />
       <Stack.Screen
+        name="universityDetails/[id]"
+        options={{
+          headerTitle: "University Details",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
         name="appartment/index"
         options={{
           headerTitle: "Appartment",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="appartmentDetails/[id]"
+        options={{
+          headerTitle: "Appartment Details",
           headerStyle: { backgroundColor: Colors.primary },
           headerTintColor: "white",
         }}
@@ -49,9 +65,25 @@ const RootLayout = () => {
         }}
       />
       <Stack.Screen
+        name="storyDetails/[id]"
+        options={{
+          headerTitle: "Story Details",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
         name="job/index"
         options={{
           headerTitle: "Job Board",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="jobDetails/[id]"
+        options={{
+          headerTitle: "Job Details",
           headerStyle: { backgroundColor: Colors.primary },
           headerTintColor: "white",
         }}
@@ -84,6 +116,22 @@ const RootLayout = () => {
         name="transection/index"
         options={{
           headerTitle: "Transection History",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="transfer/index"
+        options={{
+          headerTitle: "Transfer Balance",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="withdraw/index"
+        options={{
+          headerTitle: "Withdraw Balance",
           headerStyle: { backgroundColor: Colors.primary },
           headerTintColor: "white",
         }}

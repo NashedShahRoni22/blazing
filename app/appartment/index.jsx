@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { View, Text, SafeAreaView, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native";
 import SplashScreen from "../../components/SplashScreen";
+import { router } from "expo-router";
 
 const Index = () => {
   const url = "https://nw71.tv/api/v1/property";
-  const [loader, setLoader] = useState(true); 
+  const [loader, setLoader] = useState(true);
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const Index = () => {
                 marginTop: 10,
                 flexDirection: "row",
                 justifyContent: "space-between",
-                alignItems: "flex-end",
+                alignItems: "center",
                 shadowColor: "#000",
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.1,
@@ -63,7 +64,7 @@ const Index = () => {
                 activeOpacity={0.7}
                 style={{
                   backgroundColor: "#FF6347",
-                  height: 25,
+                  height: 30,
                   justifyContent: "center",
                   alignItems: "center",
                   borderRadius: 25,
@@ -74,15 +75,19 @@ const Index = () => {
                   paddingHorizontal: 15,
                 }}
               >
-                <Text
-                  style={{
-                    color: "white",
-                    fontSize: 12,
-                    fontWeight: "600",
-                  }}
+                <TouchableOpacity
+                  onPress={() => router.push(`/appartmentDetails/${item?.id}`)}
                 >
-                  View Details
-                </Text>
+                  <Text
+                    style={{
+                      color: "white",
+                      fontSize: 12,
+                      fontWeight: "600",
+                    }}
+                  >
+                    View Details
+                  </Text>
+                </TouchableOpacity>
               </TouchableOpacity>
             </View>
           )}

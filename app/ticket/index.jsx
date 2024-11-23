@@ -3,11 +3,12 @@ import {
   SafeAreaView,
   Text,
   TextInput,
-  Button,
   View,
   StyleSheet,
   TouchableOpacity,
   Platform,
+  ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -21,15 +22,92 @@ const index = () => {
     dateOfBirth: "",
     email: "",
     phone: "",
-    trimType: "One way",
+    tripType: "One way",
   });
 
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDateField, setSelectedDateField] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = () => {
-    console.log(formData);
+  const handleSubmit = async () => {
+    const {
+      fullName,
+      destination,
+      departureDate,
+      returnDate,
+      dateOfBirth,
+      email,
+      phone,
+      tripType,
+    } = formData;
+  
+    // Date validation
+    const today = new Date();
+    const departureDateObj = new Date(departureDate);
+    const returnDateObj = returnDate ? new Date(returnDate) : null;
+    const dateOfBirthObj = new Date(dateOfBirth);
+  
+    if (
+      !fullName ||
+      !destination ||
+      !departureDate ||
+      !dateOfBirth ||
+      !email ||
+      !phone
+    ) {
+      alert("All fields are required.");
+      return;
+    }
+  
+    if (departureDateObj <= today) {
+      alert("Departure date must be after today.");
+      return;
+    }
+  
+    if (returnDateObj && returnDateObj < departureDateObj) {
+      alert("Return date must be equal or after departure date.");
+      return;
+    }
+  
+    // Ensure dateOfBirth is before today
+    if (dateOfBirthObj >= today) {
+      alert("Date of birth must be before today.");
+      return;
+    }
+  
+    const requestData = new FormData();
+    requestData.append("full_name", fullName);
+    requestData.append("departure", departureDate);
+    requestData.append("destination", destination);
+    requestData.append("departure_date", departureDate);
+    requestData.append("return_date", returnDate || null);
+    requestData.append("date_of_birth", dateOfBirth);
+    requestData.append("email", email);
+    requestData.append("phone", phone);
+    requestData.append("trip_type", tripType);
+  
+    setIsSubmitting(true);
+  
+    try {
+      const response = await fetch("https://nw71.tv/api/v1/air-ticket", {
+        method: "POST",
+        body: requestData,
+      });
+  
+      const responseData = await response.json();
+      if (response.ok) {
+        alert("Air ticket request sent successfully.");
+      } else {
+        alert(`Error: ${responseData.message}`);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+  
 
   const handleChange = (name, value) => {
     setFormData({
@@ -53,112 +131,119 @@ const index = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 16 }}>
-      {/* Full Name */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Full Name</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Full Name"
-          value={formData.fullName}
-          onChangeText={(text) => handleChange("fullName", text)}
-        />
-      </View>
-
-      {/* Destination */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Destination</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Destination"
-          value={formData.destination}
-          onChangeText={(text) => handleChange("destination", text)}
-        />
-      </View>
-
-      {/* Departure Date */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Departure Date</Text>
-        <TouchableOpacity onPress={() => showDatepicker("departureDate")}>
+      <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+        {/* Full Name */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Full Name</Text>
           <TextInput
             style={styles.input}
-            editable={false}
-            placeholder="YYYY-MM-DD"
-            value={formData.departureDate}
+            placeholder="Enter Full Name"
+            value={formData.fullName}
+            onChangeText={(text) => handleChange("fullName", text)}
           />
-        </TouchableOpacity>
-      </View>
+        </View>
 
-      {/* Return Date (Optional) */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Return Date (Optional)</Text>
-        <TouchableOpacity onPress={() => showDatepicker("returnDate")}>
+        {/* Destination */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Destination</Text>
           <TextInput
             style={styles.input}
-            editable={false}
-            placeholder="YYYY-MM-DD"
-            value={formData.returnDate}
+            placeholder="Enter Destination"
+            value={formData.destination}
+            onChangeText={(text) => handleChange("destination", text)}
           />
-        </TouchableOpacity>
-      </View>
+        </View>
 
-      {/* Date of Birth */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Date of Birth</Text>
-        <TouchableOpacity onPress={() => showDatepicker("dateOfBirth")}>
+        {/* Departure Date */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Departure Date</Text>
+          <TouchableOpacity onPress={() => showDatepicker("departureDate")}>
+            <TextInput
+              style={styles.input}
+              editable={false}
+              placeholder="YYYY-MM-DD"
+              value={formData.departureDate}
+            />
+          </TouchableOpacity>
+        </View>
+
+        {/* Return Date (Optional) */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Return Date (Optional)</Text>
+          <TouchableOpacity onPress={() => showDatepicker("returnDate")}>
+            <TextInput
+              style={styles.input}
+              editable={false}
+              placeholder="YYYY-MM-DD"
+              value={formData.returnDate}
+            />
+          </TouchableOpacity>
+        </View>
+
+        {/* Date of Birth */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Date of Birth</Text>
+          <TouchableOpacity onPress={() => showDatepicker("dateOfBirth")}>
+            <TextInput
+              style={styles.input}
+              editable={false}
+              placeholder="YYYY-MM-DD"
+              value={formData.dateOfBirth}
+            />
+          </TouchableOpacity>
+        </View>
+
+        {/* Email */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.input}
-            editable={false}
-            placeholder="YYYY-MM-DD"
-            value={formData.dateOfBirth}
+            placeholder="Enter Email"
+            value={formData.email}
+            onChangeText={(text) => handleChange("email", text)}
+            keyboardType="email-address"
           />
-        </TouchableOpacity>
-      </View>
+        </View>
 
-      {/* Email */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Email"
-          value={formData.email}
-          onChangeText={(text) => handleChange("email", text)}
-          keyboardType="email-address"
-        />
-      </View>
+        {/* Phone */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Phone</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Phone"
+            value={formData.phone}
+            onChangeText={(text) => handleChange("phone", text)}
+            keyboardType="phone-pad"
+          />
+        </View>
 
-      {/* Phone */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Phone</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Phone"
-          value={formData.phone}
-          onChangeText={(text) => handleChange("phone", text)}
-          keyboardType="phone-pad"
-        />
-      </View>
+        {/* Trip Type (Select Box) */}
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Trip Type</Text>
+          <Picker
+            selectedValue={formData.tripType}
+            style={styles.picker}
+            onValueChange={(itemValue) => handleChange("tripType", itemValue)}
+          >
+            <Picker.Item label="One way" value="One way" />
+            <Picker.Item label="Round" value="Round" />
+          </Picker>
+        </View>
 
-      {/* Trim Type (Select Box) */}
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Trim Type</Text>
-        <Picker
-          selectedValue={formData.trimType}
-          style={styles.picker}
-          onValueChange={(itemValue) => handleChange("trimType", itemValue)}
+        {/* Submit Button */}
+        <TouchableOpacity
+          activeOpacity={0.7}
+          style={styles.button}
+          onPress={handleSubmit}
+          disabled={isSubmitting}
         >
-          <Picker.Item label="One way" value="One way" />
-          <Picker.Item label="Round" value="Round" />
-        </Picker>
-      </View>
-
-      {/* Submit Button */}
-      <TouchableOpacity
-        activeOpacity={0.7}
-        style={styles.button}
-        onPress={handleSubmit}
-      >
-        <Text style={styles.buttonText}>Request Air Ticket</Text>
-      </TouchableOpacity>
+          {isSubmitting ? (
+            <ActivityIndicator size="small" color="#ffffff" />
+          ) : (
+            <Text style={styles.buttonText}>Request Air Ticket</Text>
+          )}
+        </TouchableOpacity>
+      </ScrollView>
 
       {/* Date Picker Modal */}
       {showDatePicker && (
@@ -174,12 +259,6 @@ const index = () => {
 };
 
 const styles = StyleSheet.create({
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 20,
-  },
   inputContainer: {
     marginBottom: 12,
   },
@@ -197,11 +276,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   picker: {
-    height: 40,
+    height: 50,
     borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 8,
     fontSize: 16,
+    marginBottom: 16,
   },
   button: {
     backgroundColor: "#E53935",
@@ -211,17 +291,17 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    paddingHorizontal: 15,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.5,
+    elevation: 5,
     marginTop: 24,
   },
   buttonText: {
-    color: "#ffffff",
-    fontSize: 20,
-    marginLeft: 8,
-    fontWeight: "600",
+    color: "#fff",
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
+
 
 export default index;

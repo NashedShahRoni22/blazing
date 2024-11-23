@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.nsr_arvi.blazing"
     },
     "web": {
       "bundler": "metro",
@@ -32,6 +33,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "4b3526e7-7331-4088-9eb0-0018c950115f"
+      }
+    },
+    "owner": "nsr_arvi"
   }
 }
