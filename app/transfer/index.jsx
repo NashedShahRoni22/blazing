@@ -4,9 +4,11 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
+import { router } from "expo-router";
 
 const index = () => {
   const [formData, setFormData] = useState({
@@ -14,11 +16,56 @@ const index = () => {
     amount: "",
   });
 
-  const [balance, setBalance] = useState(50);
+  const [balance, setBalance] = useState("00.00");
+  const [loading, setLoading] = useState(false); // Loading state for the spinner
+
+  const url = "https://nw71.tv/api/v1/wallet";
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === "success") {
+          // Format the amount to always have two decimal places
+          setBalance(parseFloat(data?.data?.amount).toFixed(2));
+        } else {
+          alert(data?.message);
+        }
+      });
+  }, []);
 
   // Handle the submit action
   const handleSubmit = () => {
-    console.log(formData);
+    const dataToSubmit = {
+      receiver_email: formData.email,
+      amount: formData.amount,
+    };
+
+    setLoading(true); // Start the spinner
+
+    // Perform the POST request
+    fetch("https://nw71.tv/api/v1/transfer-balance", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dataToSubmit),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setLoading(false); // Stop the spinner
+
+        if (data.status === "success") {
+          alert("Transfer successful");
+          router.push("/wallet");;
+        } else {
+          alert("Transfer failed: " + data.message);
+        }
+      })
+      .catch((error) => {
+        setLoading(false); // Stop the spinner
+        alert("An error occurred: " + error.message);
+      });
   };
 
   // Handle form input changes
@@ -33,16 +80,16 @@ const index = () => {
   const isButtonDisabled = () => {
     const enteredAmount = parseFloat(formData.amount);
     return (
-      isNaN(enteredAmount) || enteredAmount <= 0 || enteredAmount > balance
+      isNaN(enteredAmount) || enteredAmount <= 0 || enteredAmount > balance || !formData.email
     );
   };
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 10 }}>
-      <Text style={{ textAlign: "justify", color:"#241147", fontWeight:600, }}>
+      <Text style={{ textAlign: "justify", color: "#241147", fontWeight: "600" }}>
         Before transfer, please check again that the user's email is correct.
         Once the transfer is done, you cannot cancel the transfer. For any wrong
-        transactions, we are not liable.{" "}
+        transactions, we are not liable.
       </Text>
 
       <View style={styles.inputContainer}>
@@ -66,7 +113,12 @@ const index = () => {
           style={styles.input}
           placeholder="Enter Amount"
           value={formData.amount}
-          onChangeText={(text) => handleChange("amount", text)}
+          onChangeText={(text) => {
+            // Only update amount if the text is a valid number
+            if (/^\d*\.?\d*$/.test(text)) {
+              handleChange("amount", text);
+            }
+          }}
           keyboardType="numeric" // Ensure user inputs numbers only
         />
       </View>
@@ -77,9 +129,13 @@ const index = () => {
         onPress={handleSubmit}
         disabled={isButtonDisabled()} // Disable button when amount is invalid
       >
-        <Text style={styles.buttonText}>
-          Transfer {formData.amount && `$${formData.amount}`}
-        </Text>
+        {loading ? (
+          <ActivityIndicator size="small" color="#ffffff" />
+        ) : (
+          <Text style={styles.buttonText}>
+            Transfer {formData.amount && `$${formData.amount}`}
+          </Text>
+        )}
       </TouchableOpacity>
     </SafeAreaView>
   );

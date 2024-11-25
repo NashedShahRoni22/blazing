@@ -1,19 +1,15 @@
-import { SafeAreaView, ScrollView, StyleSheet, Image, Text } from "react-native";
+import { Dimensions, SafeAreaView, ScrollView, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import SplashScreen from "../../components/SplashScreen";
-import HTML from "react-native-render-html";
-import { useWindowDimensions } from "react-native";
-import { WebView } from "react-native-webview"; // Import WebView for iframe support
-
+import { RenderHTML } from "react-native-render-html";
 
 const storyDetails = () => {
   const { id } = useLocalSearchParams();
   const url = `https://nw71.tv/api/v1/success-story/${id}`;
   const [loader, setLoader] = useState(true);
   const [data, setData] = useState(null);
-
-  const { width } = useWindowDimensions(); // Get screen width for responsive images
+  const { width } = Dimensions.get("window");
 
   useEffect(() => {
     fetch(url)
@@ -30,38 +26,23 @@ const storyDetails = () => {
       });
   }, [id]);
 
-  // Custom renderers to handle images and iframe (YouTube)
-  const renderers = {
-    img: ({ src }) => {
-      return (
-        <Image
-          source={{ uri: src }}
-          style={{ width: width - 20, height: 200, resizeMode: "contain" }}
-        />
-      );
-    },
-    iframe: ({ src }) => {
-      const fullSrc = src.startsWith("http") ? src : `https:${src}`; // Ensure the src is a full URL
-      return (
-        <WebView
-          originWhitelist={['*']}
-          source={{ uri: fullSrc }}
-          style={{ width: width - 20, height: 200 }}
-        />
-      );
-    },
-  };
-
   return (
     <SafeAreaView style={{ flex: 1, padding: 10 }}>
       {loader ? (
         <SplashScreen />
       ) : (
         <ScrollView contentContainerStyle={styles.container}>
-          <HTML
+          {/* <RenderHTML contentWidth={300} source={{ html: data?.details }} /> */}
+          <RenderHTML
+            contentWidth={width}
             source={{ html: data?.details }}
-            tagsStyles={styles.htmlContent} // Optional: Customize HTML content styling
-            renderers={renderers} // Add custom renderers for images and iframe
+            tagsStyles={{
+              iframe: {
+                width: "100%",
+                height: 200, // Adjust height as needed
+              },
+            }}
+            WebView={require("react-native-webview").WebView}
           />
         </ScrollView>
       )}

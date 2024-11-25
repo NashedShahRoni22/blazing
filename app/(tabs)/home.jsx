@@ -1,6 +1,5 @@
 import { View, Text, SafeAreaView, Image, ScrollView } from "react-native";
 import React from "react";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { TouchableOpacity } from "react-native";
 import Images from "../../constants/Images";
 import { router } from "expo-router";
@@ -62,8 +61,7 @@ const Home = () => {
             backgroundColor: "#E53935", // primary color
             flexDirection: "row",
             alignItems: "center",
-            paddingTop: 80,
-            paddingBottom: 20,
+            paddingVertical:40,
             paddingHorizontal: 20,
             justifyContent: "space-between",
           }}

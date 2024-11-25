@@ -13,16 +13,25 @@ import { router } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons"; // Import FontAwesome icons
 
 const index = () => {
-  const [amount, setAmount] = useState("50");
+  const [amount, setAmount] = useState("00.00");
   const url = "https://nw71.tv/api/v1/wallet";
 
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        if(data.status === "success"){
+          // Format the amount to always have two decimal places
+          setAmount(parseFloat(data?.data?.amount).toFixed(2));
+        }
+        else{
+          alert(data?.message);
+        }
+      });
   }, []);
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={{flex:1}}>
       <ScrollView contentContainerStyle={styles.container}>
         {/* Image - Centered */}
         <Image source={Images.wallet} style={styles.image} />
@@ -85,7 +94,7 @@ const index = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 14,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -117,7 +126,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    gap: 12,
+    gap: 14,
     width: "100%",
   },
   button: {
@@ -133,7 +142,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     paddingHorizontal: 15,
-    elevation: 5, // Android shadow
+    elevation: 5, 
   },
   buttonText: {
     color: "#ffffff",

@@ -1,202 +1,137 @@
-import { View, Text, SafeAreaView, FlatList } from "react-native";
-import React from "react";
+import { View, Text, SafeAreaView, FlatList, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import SplashScreen from "../../components/SplashScreen";
 
 const index = () => {
-  const DATA = [
-    {
-      id: "aB1$2dFg",
-      status: "Sent",
-      email: "john.doe@example.com",
-      amount: 5,
-      date: "2024-11-12 14:30",
-    },
-    {
-      id: "hJ3@5kLm",
-      status: "Received",
-      email: "jane.smith@example.com",
-      amount: 10,
-      date: "2024-11-12 15:45",
-    },
-    {
-      id: "pQ7&6tHr",
-      status: "Withdraw",
-      email: "alice.jones@example.com",
-      amount: 5,
-      date: "2024-11-12 16:00",
-    },
-    {
-      id: "uY9!8wIr",
-      status: "Sent",
-      email: "bob.white@example.com",
-      amount: 20,
-      date: "2024-11-12 16:30",
-    },
-    {
-      id: "nK4#1pQm",
-      status: "Received",
-      email: "carla.green@example.com",
-      amount: 10,
-      date: "2024-11-12 17:15",
-    },
-    {
-      id: "oL2*5fSz",
-      status: "Withdraw",
-      email: "david.brown@example.com",
-      amount: 5,
-      date: "2024-11-12 18:00",
-    },
-    {
-      id: "tX3^9vEw",
-      status: "Sent",
-      email: "emily.martin@example.com",
-      amount: 20,
-      date: "2024-11-12 18:45",
-    },
-    {
-      id: "iR6!0bGv",
-      status: "Received",
-      email: "frank.harris@example.com",
-      amount: 10,
-      date: "2024-11-12 19:00",
-    },
-    {
-      id: "sJ7$2kWz",
-      status: "Withdraw",
-      email: "grace.clark@example.com",
-      amount: 5,
-      date: "2024-11-12 19:30",
-    },
-    {
-      id: "cV8@1zNq",
-      status: "Sent",
-      email: "henry.miller@example.com",
-      amount: 20,
-      date: "2024-11-12 20:00",
-    },
-    {
-      id: "dL0#3oXj",
-      status: "Received",
-      email: "isabella.johnson@example.com",
-      amount: 10,
-      date: "2024-11-12 21:15",
-    },
-    {
-      id: "fK5!9mXt",
-      status: "Withdraw",
-      email: "jackson.davis@example.com",
-      amount: 5,
-      date: "2024-11-12 22:00",
-    },
-    {
-      id: "qP2$7wYr",
-      status: "Sent",
-      email: "katherine.lee@example.com",
-      amount: 10,
-      date: "2024-11-12 22:30",
-    },
-  ];
+  const [data, setData] = useState([]);
+  const [loader, setLoader] = useState(false);
+  const url = "https://nw71.tv/api/v1/transaction-history";
+
+  useEffect(() => {
+    setLoader(true);
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data?.status === "success") {
+          setData(data?.data);
+          setLoader(false);
+        } else {
+          alert(data?.message);
+          setLoader(false);
+        }
+      });
+  }, []);
+
+  // Function to determine the text color based on status
+  const getStatusColor = (status) => {
+    switch (status) {
+      case "Pending":
+        return "orange"; // Yellow for pending
+      case "Successful":
+        return "green"; // Green for successful
+      default:
+        return "#A3A3A3"; // Gray for default status
+    }
+  };
+
+  // Function to determine the amount color based on transaction_type
+  const getAmountColor = (transaction_type) => {
+    return transaction_type === "Received" ? "green" : "red"; // Green for "Received", red for others
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 10 }}>
-      <FlatList
-        data={DATA}
-        showsHorizontalScrollIndicator={false}
-        renderItem={({ item }) => {
-          // Determine color based on status
-          const getStatusColor = (status) => {
-            switch (status) {
-              case "Sent":
-                return "orange";
-              case "Received":
-                return "green";
-              case "Withdraw":
-                return "red";
-              default:
-                return "gray";
-            }
-          };
-
-          return (
-            <View
-              style={{
-                padding: 10,
-                backgroundColor: "white",
-                borderRadius: 10,
-                marginTop: 10,
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 2 },
-                shadowOpacity: 0.1,
-                shadowRadius: 4,
-                gap: 8,
-              }}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    gap: 4,
-                    alignItems: "center",
-                  }}
-                >
+      {loader ? (
+        <SplashScreen />
+      ) : (
+        <FlatList
+          data={data}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => {
+            return (
+              <View style={styles.card}>
+                <View style={styles.cardHeader}>
+                  <View style={styles.cardTitle}>
+                    <Text
+                      style={[
+                        styles.statusText,
+                        { color: getStatusColor(item.status) }, // Status text color
+                      ]}
+                    >
+                      {item.status}
+                    </Text>
+                    <Text style={styles.idText}>#{item.id}</Text>
+                  </View>
                   <Text
-                    style={{
-                      fontSize: 18,
-                      fontWeight: "600",
-                      color: getStatusColor(item.status),
-                    }}
+                    style={[
+                      styles.amountText,
+                      { color: getAmountColor(item.transaction_type) }, // Conditional color based on transaction_type
+                    ]}
                   >
-                    {item.status}
-                  </Text>
-                  <Text
-                    style={{
-                      color: "#A3A3A3",
-                    }}
-                  >
-                    #{item.id}
+                    ${item.amount}
                   </Text>
                 </View>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: "600",
-                    color: getStatusColor(item.status),
-                  }}
-                >
-                  ${item.amount}
-                </Text>
+
+                <View style={styles.cardFooter}>
+                  <Text style={styles.emailText}>{item.email}</Text>
+                  <Text style={styles.emailText}>{item.transaction_type}</Text>
+                </View>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text
-                  style={{
-                    color: "#A3A3A3",
-                  }}
-                >
-                  {item.email}
-                </Text>
-                <Text
-                  style={{
-                    color: "#A3A3A3",
-                  }}
-                >
-                  {item.date}
-                </Text>
-              </View>
-            </View>
-          );
-        }}
-      />
+            );
+          }}
+        />
+      )}
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  card: {
+    padding: 10,
+    backgroundColor: "white", // White background for the card
+    borderRadius: 10,
+    marginTop: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    gap: 8,
+  },
+  cardHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  cardTitle: {
+    flexDirection: "row",
+    gap: 4,
+    alignItems: "center",
+  },
+  statusText: {
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  idText: {
+    color: "#A3A3A3",
+  },
+  amountText: {
+    fontSize: 18,
+    fontWeight: "600",
+  },
+  cardFooter: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  emailText: {
+    color: "#A3A3A3",
+  },
+  dateText: {
+    color: "#A3A3A3",
+  },
+  transactionTypeText: {
+    fontSize: 14,
+    color: "#A3A3A3",
+    marginTop: 10,
+  },
+});
 
 export default index;
