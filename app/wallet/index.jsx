@@ -5,22 +5,31 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Images from "../../constants/Images";
 import { router } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons"; // Import FontAwesome icons
 
 const index = () => {
+  const [amount, setAmount] = useState("50");
+  const url = "https://nw71.tv/api/v1/wallet";
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+  }, []);
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
+      <ScrollView contentContainerStyle={styles.container}>
         {/* Image - Centered */}
         <Image source={Images.wallet} style={styles.image} />
 
         {/* Balance Text */}
         <Text style={styles.balanceLabel}>Balance</Text>
-        <Text style={styles.balanceAmount}>$50.00</Text>
+        <Text style={styles.balanceAmount}>${amount}</Text>
 
         <View style={styles.buttonsContainer}>
           {/* Transfer Balance Button */}
@@ -68,7 +77,7 @@ const index = () => {
             <Text style={styles.buttonText}>Transection{"\n"}History</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -105,11 +114,11 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   buttonsContainer: {
-    flexDirection: "row", // Align buttons horizontally
-    flexWrap: "wrap", // Allow buttons to wrap to the next line
-    justifyContent: "space-between", // Add space between buttons
-    gap: 12, // Adds gap between buttons
-    width: "100%", // Make sure buttons take full width
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    gap: 12,
+    width: "100%",
   },
   button: {
     backgroundColor: "#E53935",
@@ -124,7 +133,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     paddingHorizontal: 15,
-    marginVertical: 10, // Vertical spacing between buttons
     elevation: 5, // Android shadow
   },
   buttonText: {

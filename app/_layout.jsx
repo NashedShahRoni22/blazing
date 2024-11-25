@@ -97,6 +97,46 @@ const RootLayout = () => {
         }}
       />
       <Stack.Screen
+        name="about/index"
+        options={{
+          headerTitle: "About Blazing",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="mentors/index"
+        options={{
+          headerTitle: "Our Mentors",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="mentorsDetails/[id]"
+        options={{
+          headerTitle: "Mentor Details",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="faq/index"
+        options={{
+          headerTitle: "FAQ",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
+        name="faqDetails/[id]"
+        options={{
+          headerTitle: "FAQ Details",
+          headerStyle: { backgroundColor: Colors.primary },
+          headerTintColor: "white",
+        }}
+      />
+      <Stack.Screen
         name="referral/index"
         options={{
           headerTitle: "Referral",

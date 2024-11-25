@@ -43,9 +43,9 @@ const Login = () => {
           <Image source={Images.google} />
           <Text
             style={{
-              color: "#808080", // gray color
-              fontSize: 20,
-              marginLeft: 8, // equivalent to ml-2
+              color: "#808080",
+              fontSize: 18,
+              marginLeft: 8,
               fontWeight: "600",
             }}
           >

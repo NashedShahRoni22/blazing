@@ -42,34 +42,6 @@ const universityDetails = () => {
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  area: {
-    fontSize: 16,
-    color: "#555",
-    marginBottom: 8,
-  },
-  price: {
-    fontSize: 16,
-    color: "#E53935",
-    marginBottom: 8,
-  },
-  referenceId: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  id: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  date: {
-    fontSize: 14,
-    color: "#888",
-    marginBottom: 8,
-  },
   htmlContent: {
     fontSize: 16,
     color: '#333',

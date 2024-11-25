@@ -1,40 +1,67 @@
-import { SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import { SafeAreaView, ScrollView, StyleSheet, Image, Text } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import SplashScreen from "../../components/SplashScreen";
-import RenderHTML from 'react-native-render-html';
+import HTML from "react-native-render-html";
+import { useWindowDimensions } from "react-native";
+import { WebView } from "react-native-webview"; // Import WebView for iframe support
+
 
 const storyDetails = () => {
   const { id } = useLocalSearchParams();
   const url = `https://nw71.tv/api/v1/success-story/${id}`;
-  const [loader, setLoader] = useState(true); 
-  const [data, setData] = useState(null); 
+  const [loader, setLoader] = useState(true);
+  const [data, setData] = useState(null);
+
+  const { width } = useWindowDimensions(); // Get screen width for responsive images
 
   useEffect(() => {
     fetch(url)
-      .then((res) => res.json()) 
+      .then((res) => res.json())
       .then((data) => {
         if (data?.status === "success") {
-          setData(data?.data);  
+          setData(data?.data);
         } else {
-          console.log("Something went wrong");  
+          console.log("Something went wrong");
         }
       })
       .finally(() => {
-        setLoader(false); 
+        setLoader(false);
       });
   }, [id]);
+
+  // Custom renderers to handle images and iframe (YouTube)
+  const renderers = {
+    img: ({ src }) => {
+      return (
+        <Image
+          source={{ uri: src }}
+          style={{ width: width - 20, height: 200, resizeMode: "contain" }}
+        />
+      );
+    },
+    iframe: ({ src }) => {
+      const fullSrc = src.startsWith("http") ? src : `https:${src}`; // Ensure the src is a full URL
+      return (
+        <WebView
+          originWhitelist={['*']}
+          source={{ uri: fullSrc }}
+          style={{ width: width - 20, height: 200 }}
+        />
+      );
+    },
+  };
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 10 }}>
       {loader ? (
-        <SplashScreen /> 
+        <SplashScreen />
       ) : (
         <ScrollView contentContainerStyle={styles.container}>
-          <RenderHTML
-            contentWidth={300} 
-            source={{ html: data?.details }} 
-            tagsStyles={styles.htmlContent} 
+          <HTML
+            source={{ html: data?.details }}
+            tagsStyles={styles.htmlContent} // Optional: Customize HTML content styling
+            renderers={renderers} // Add custom renderers for images and iframe
           />
         </ScrollView>
       )}
@@ -43,40 +70,15 @@ const storyDetails = () => {
 };
 
 const styles = StyleSheet.create({
-  title: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginBottom: 10,
-  },
-  area: {
-    fontSize: 16,
-    color: "#555",
-    marginBottom: 8,
-  },
-  price: {
-    fontSize: 16,
-    color: "#E53935",
-    marginBottom: 8,
-  },
-  referenceId: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  id: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  date: {
-    fontSize: 14,
-    color: "#888",
-    marginBottom: 8,
+  container: {
+    padding: 10,
   },
   htmlContent: {
     fontSize: 16,
-    color: '#333',
+    color: "#333",
     lineHeight: 22,
     marginBottom: 12,
-  }
+  },
 });
 
 export default storyDetails;

@@ -56,22 +56,8 @@ const styles = StyleSheet.create({
     color: "#555",
     marginBottom: 8,
   },
-  price: {
-    fontSize: 16,
-    color: "#E53935",
-    marginBottom: 8,
-  },
   referenceId: {
     fontSize: 16,
-    marginBottom: 8,
-  },
-  id: {
-    fontSize: 16,
-    marginBottom: 8,
-  },
-  date: {
-    fontSize: 14,
-    color: "#888",
     marginBottom: 8,
   },
   htmlContent: {

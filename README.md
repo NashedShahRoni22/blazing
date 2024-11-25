@@ -1,7 +1,7 @@
-To Build:
+For APK:
 ============================
-eas build --platform android
-
-For Abb:
-======================================
 eas build -p android --profile preview
+
+For ABB:
+======================================
+eas build --platform android
