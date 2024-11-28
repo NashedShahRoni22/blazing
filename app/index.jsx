@@ -4,11 +4,19 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
-  ScrollView,
 } from "react-native";
 import React from "react";
 import Images from "../constants/Images";
 import { router } from "expo-router";
+import {
+  useFonts,
+  Montserrat_400Regular,
+  Montserrat_500Medium,
+  Montserrat_600SemiBold,
+  Montserrat_700Bold,
+  Montserrat_800ExtraBold,
+  Montserrat_900Black,
+} from "@expo-google-fonts/montserrat";
 
 const index = () => {
   const DATA = [
@@ -22,7 +30,7 @@ const index = () => {
     },
     {
       image: Images.house,
-      title: "Appartment",
+      title: "Properties",
     },
     {
       image: Images.job,
@@ -42,7 +50,7 @@ const index = () => {
     },
     {
       image: Images.faq,
-      title: "Faq",
+      title: "FAQ",
     },
     {
       image: Images.about,
@@ -50,50 +58,71 @@ const index = () => {
     },
   ];
 
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+  let [fontsLoaded] = useFonts({
+    Montserrat_400Regular,
+    Montserrat_500Medium,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
+    Montserrat_800ExtraBold,
+    Montserrat_900Black,
+  });
+
+  if (!fontsLoaded) {
+    return <View></View>;
+  } else {
+    return (
+      <SafeAreaView style={{ flex: 1 }}>
         <View
           style={{
-            backgroundColor: "#E53935", // primary color
-            height: 200,
+            backgroundColor: "#9D1F31", // primary color
+            height: "30%",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
+            borderBottomLeftRadius: 50,
+            borderBottomRightRadius: 50,
           }}
         >
-          <Image source={Images.logo} style={{ height: 80, width: 220 }} />
+          <Image source={Images.logo} style={{ height: 80, width: 240 }} />
         </View>
-
-        <View style={{ paddingHorizontal: 20 }}>
-          <View
-            style={{
-              marginTop: 54,
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-            }}
-          >
-            {DATA.map((data, index) => (
-              <View
-                key={index}
+        <View
+          style={{
+            flexDirection: "row",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+            padding: 30,
+            height: '50%'
+          }}
+        >
+          {DATA.map((data, index) => (
+            <View
+              key={index}
+              style={{
+                width: "30%",
+                marginBottom: 16,
+                alignItems: "center",
+                gap: 4,
+              }}
+            >
+              <Image source={data.image} style={{ height: 48, width: 48 }} />
+              <Text
                 style={{
-                  width: "30%",
-                  marginBottom: 16,
-                  alignItems: "center",
-                  gap: 4,
+                  fontFamily: "Montserrat_600SemiBold",
+                  fontSize: 12,
+                  lineHeight: 18,
+                  textAlign: "center",
                 }}
               >
-                <Image source={data.image} style={{ height: 48, width: 48 }} />
-                <Text>{data.title}</Text>
-              </View>
-            ))}
-          </View>
+                {data.title}
+              </Text>
+            </View>
+          ))}
+        </View>
+        <View style={{ paddingHorizontal: 30, height: '20%' }}>
           <TouchableOpacity
             activeOpacity={0.7}
             style={{
-              marginTop: 36,
-              backgroundColor: "#E53935", // primary color
+              backgroundColor: "#9D1F31", // primary color
               height: 56,
               justifyContent: "center",
               alignItems: "center",
@@ -108,17 +137,18 @@ const index = () => {
             <Text
               style={{
                 color: "white",
-                fontSize: 20,
-                fontWeight: "600",
+                  fontSize: 18,
+                  fontFamily: "Montserrat_600SemiBold",
+                  letterSpacing: 1
               }}
             >
               Tap to continue
             </Text>
           </TouchableOpacity>
         </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+      </SafeAreaView>
+    );
+  }
 };
 
 export default index;
