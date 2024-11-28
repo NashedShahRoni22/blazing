@@ -40,65 +40,65 @@ const Index = () => {
                 backgroundColor: "white",
                 borderRadius: 10,
                 marginBottom: 10,
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
                 shadowColor: "#000",
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.1,
                 shadowRadius: 4,
+                width: "100%",
               }}
             >
-              <View>
-                <Text
-                  style={{ fontSize: 16, fontFamily: "Montserrat_600SemiBold" }}
-                >
-                  {item?.title}
-                </Text>
-                <Text
-                  style={{
-                    color: "#808080",
-                    fontSize: 14,
-                    marginVertical: 3,
-                    fontFamily: "Montserrat_400Regular",
-                  }}
-                >
-                  {item?.area}
-                </Text>
-                <Text
-                  style={{ fontSize: 14, fontFamily: "Montserrat_600SemiBold" }}
-                >
-                  ${item?.price}
-                </Text>
-              </View>
-              <View
-                style={{
-                  backgroundColor: "#9D1F31",
-                  height: 30,
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderRadius: 25,
-                  shadowColor: "#000",
-                  shadowOffset: { width: 0, height: 2 },
-                  shadowOpacity: 0.1,
-                  shadowRadius: 4,
-                  paddingHorizontal: 15,
-                }}
+              <Text
+                style={{ fontSize: 14, fontFamily: "Montserrat_600SemiBold" }}
               >
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  onPress={() => router.push(`/appartmentDetails/${item?.id}`)}
-                >
+                {item?.title}
+              </Text>
+              <View style={{justifyContent:"space-between", flexDirection:"row",alignItems:"flex-end"}}>
+                <View>
                   <Text
                     style={{
-                      color: "white",
-                      fontSize: 10,
-                      fontFamily: "Montserrat_600SemiBold",
+                      color: "#808080",
+                      fontSize: 12,
+                      marginVertical: 3,
+                      fontFamily: "Montserrat_500Medium",
                     }}
                   >
-                    View Details
+                    {item?.area}
                   </Text>
-                </TouchableOpacity>
+                  <Text
+                    style={{ fontSize: 14, fontFamily: "Montserrat_600SemiBold" }}
+                  >
+                    ${item?.price}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    backgroundColor: "#9D1F31",
+                    height: 30,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: 25,
+                    shadowColor: "#000",
+                    shadowOffset: { width: 0, height: 2 },
+                    shadowOpacity: 0.1,
+                    shadowRadius: 4,
+                    paddingHorizontal: 15,
+                  }}
+                >
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => router.push(`/appartmentDetails/${item?.id}`)}
+                  >
+                    <Text
+                      style={{
+                        color: "white",
+                        fontSize: 10,
+                        fontFamily: "Montserrat_600SemiBold",
+                      }}
+                    >
+                      View Details
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           )}

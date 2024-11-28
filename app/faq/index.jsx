@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import SplashScreen from "../../components/SplashScreen";
 import { router } from "expo-router";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
 
 const index = () => {
   const url = "https://nw71.tv/api/v1/faqs";
@@ -35,10 +37,10 @@ const index = () => {
             return (
               <TouchableOpacity
                 style={{
-                  padding: 20,
+                  padding: 15,
                   backgroundColor: "white",
                   borderRadius: 10,
-                  marginTop: 10,
+                  marginBottom: 10,
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "center",
@@ -49,7 +51,13 @@ const index = () => {
                 }}
                 onPress={() => router.push(`/faqDetails/${item?.id}`)}
               >
-                <Text style={{ fontSize: 16, fontFamily: "Montserrat_600SemiBold", }}>{item?.title}</Text>
+                <Text style={{ fontSize: 14, fontFamily: "Montserrat_600SemiBold", width: '90%' }}>{item?.title}</Text>
+                <View style={{width:'6%'}}>
+                  <Ionicons
+                    name="chevron-down-outline"
+                    size={24}
+                  />
+                </View>
               </TouchableOpacity>
             );
           }}

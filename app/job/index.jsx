@@ -38,71 +38,70 @@ const index = () => {
                   padding: 10,
                   backgroundColor: "white",
                   borderRadius: 10,
-                  marginTop: 10,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+                  marginBottom: 10,
                   shadowColor: "#000",
                   shadowOffset: { width: 0, height: 2 },
                   shadowOpacity: 0.1,
                   shadowRadius: 4,
                 }}
               >
-                <View>
-                  <Text
-                    style={{
-                      fontSize: 16,
-                      fontFamily: "Montserrat_600SemiBold",
-                    }}
-                  >
-                    {item?.title}
-                  </Text>
-                  <Text
-                    style={{
-                      color: "#808080",
-                      fontSize: 14,
-                      marginVertical: 3,
-                      fontFamily: "Montserrat_400Regular",
-                    }}
-                  >
-                    {item?.area}
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 14,
-                      fontWeight: "600",
-                      fontFamily: "Montserrat_600SemiBold",
-                    }}
-                  >
-                    ${item?.salary}
-                  </Text>
-                </View>
-                <TouchableOpacity
-                  activeOpacity={0.7}
+                <Text
                   style={{
-                    backgroundColor: "#9D1F31",
-                    height: 30,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    borderRadius: 25,
-                    shadowColor: "#000",
-                    shadowOffset: { width: 0, height: 2 },
-                    shadowOpacity: 0.1,
-                    shadowRadius: 4,
-                    paddingHorizontal: 15,
+                    fontSize: 14,
+                    fontFamily: "Montserrat_600SemiBold",
                   }}
-                  onPress={() => router.push(`/jobDetails/${item?.id}`)}
                 >
-                  <Text
+                  {item?.title}
+                </Text>
+                <View style={{flexDirection:"row",justifyContent:"space-between",alignItems:"flex-end"}}>
+                  <View>
+                    <Text
+                      style={{
+                        color: "#808080",
+                        fontSize: 12,
+                        marginVertical: 3,
+                        fontFamily: "Montserrat_400Regular",
+                      }}
+                    >
+                      {item?.area}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        fontWeight: "600",
+                        fontFamily: "Montserrat_600SemiBold",
+                      }}
+                    >
+                      ${item?.salary}
+                    </Text>
+                  </View>
+                  <TouchableOpacity
+                    activeOpacity={0.7}
                     style={{
-                      color: "white",
-                      fontSize: 10,
-                      fontFamily: "Montserrat_600SemiBold",
+                      backgroundColor: "#9D1F31",
+                      height: 30,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 25,
+                      shadowColor: "#000",
+                      shadowOffset: { width: 0, height: 2 },
+                      shadowOpacity: 0.1,
+                      shadowRadius: 4,
+                      paddingHorizontal: 15,
                     }}
+                    onPress={() => router.push(`/jobDetails/${item?.id}`)}
                   >
-                    View Details
-                  </Text>
-                </TouchableOpacity>
+                    <Text
+                      style={{
+                        color: "white",
+                        fontSize: 10,
+                        fontFamily: "Montserrat_600SemiBold",
+                      }}
+                    >
+                      View Details
+                    </Text>
+                  </TouchableOpacity>
+                </View>
               </View>
             );
           }}

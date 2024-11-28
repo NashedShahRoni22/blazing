@@ -110,7 +110,7 @@ const index = () => {
                 padding: 10,
                 backgroundColor: "white",
                 borderRadius: 10,
-                marginTop: 10,
+                marginBottom: 10,
                 shadowColor: "#000",
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.1,
@@ -122,18 +122,13 @@ const index = () => {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
+                  alignItems:"center"
                 }}
               >
-                <View
-                  style={{
-                    flexDirection: "row",
-                    gap: 4,
-                    alignItems: "center",
-                  }}
-                >
+                <View>
                   <Text
                     style={{
-                      fontSize: 18,
+                      fontSize: 16,
                       fontFamily: "Montserrat_600SemiBold",
                       color: isPending ? "gray" : "green", // Set color based on status
                     }}
@@ -142,44 +137,40 @@ const index = () => {
                   </Text>
                   <Text
                     style={{
-                      color: "#A3A3A3",
-                      fontFamily: "Montserrat_400Regular",
+                      color: "#ccc",
+                      fontSize: 12,
+                      fontFamily: "Montserrat_600SemiBold",
                     }}
                   >
-                    #{item.id}
+                    (#{item.id})
+                  </Text>
+                  <Text
+                    style={{
+                      color: "#ccc",
+                      fontSize: 12,
+                      fontFamily: "Montserrat_500Medium",
+                    }}
+                  >
+                    {item.email}
+                  </Text>
+                  <Text
+                    style={{
+                      color: "#ccc",
+                      fontSize: 12,
+                      fontFamily: "Montserrat_500Medium",
+                    }}
+                  >
+                    {item.date}
                   </Text>
                 </View>
                 <Text
                   style={{
-                    fontSize: 18,
+                    fontSize: 30,
                     fontFamily: "Montserrat_600SemiBold",
                     color: isPending ? "gray" : "green", // Set color based on status
                   }}
                 >
                   ${item.amount}
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text
-                  style={{
-                    color: "#A3A3A3",
-                    fontFamily: "Montserrat_500Medium",
-                  }}
-                >
-                  {item.email}
-                </Text>
-                <Text
-                  style={{
-                    color: "#A3A3A3",
-                    fontFamily: "Montserrat_500Medium",
-                  }}
-                >
-                  {item.date}
                 </Text>
               </View>
             </View>

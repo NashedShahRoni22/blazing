@@ -39,9 +39,7 @@ const index = () => {
                   padding: 10,
                   backgroundColor: "white",
                   borderRadius: 10,
-                  marginTop: 10,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
+                  marginBottom: 10,
                   alignItems: "center",
                   shadowColor: "#000",
                   shadowOffset: { width: 0, height: 2 },
@@ -49,18 +47,23 @@ const index = () => {
                   shadowRadius: 4,
                 }}
               >
-                <View style={{ flexDirection: "row", gap: 4, alignItems:"center" }}>
-                  <Image source={Images.user} style={{height:64, width:64, borderRadius:50}}/>
-                  <View>
-                    <Text style={{ fontSize: 16, fontFamily:"Montserrat_600SemiBold" }}>
-                      {item?.name}
-                    </Text>
-                  </View>
-                </View>
+                <Image
+                  source={Images.user}
+                  style={{ height: 64, width: 64, borderRadius: 50 }}
+                />
+                <Text
+                  style={{
+                    fontSize: 14,
+                    fontFamily: "Montserrat_600SemiBold",
+                    marginVertical: 5
+                  }}
+                >
+                  {item?.name}
+                </Text>
                 <TouchableOpacity
                   activeOpacity={0.7}
                   style={{
-                    backgroundColor: "#9D1F31", 
+                    backgroundColor: "#9D1F31",
                     height: 30,
                     justifyContent: "center",
                     alignItems: "center",
@@ -70,11 +73,16 @@ const index = () => {
                     shadowOpacity: 0.1,
                     shadowRadius: 4,
                     paddingHorizontal: 15,
+                    width: "100%",
                   }}
                   onPress={() => router.push(`/storyDetails/${item?.id}`)}
                 >
                   <Text
-                    style={{ color: "white", fontSize: 10, fontFamily: "Montserrat_600SemiBold",}}
+                    style={{
+                      color: "white",
+                      fontSize: 10,
+                      fontFamily: "Montserrat_600SemiBold",
+                    }}
                   >
                     View Story
                   </Text>
