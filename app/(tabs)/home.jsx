@@ -129,7 +129,7 @@ const Home = () => {
                 }}
                 onPress={() => router.push(`${data?.link}`)}
               >
-                <Image source={data.image} style={{ height: 64, width: 64 }} />
+                <Image source={data.image} style={{ height: 48, width: 48 }} />
                 <Text>{data.title}</Text>
               </TouchableOpacity>
             ))}

@@ -46,13 +46,13 @@ const country = () => {
                   shadowOpacity: 0.1,
                   shadowRadius: 4,
                   padding: 10,
-                  gap:4,
+                  gap:8,
                 }}
                 onPress={() => router.push(`/university/${item?.visa_id}/${item?.id}`)}
               >
                 <Image source={Images?.country} style={{height:48, width:48}} />
                 <Text
-                  style={{ fontSize: 18, fontWeight: "600" }}
+                  style={{ fontSize: 18}}
                 >
                   {item?.country_name}
                 </Text>

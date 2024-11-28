@@ -1,7 +1,6 @@
-import { View, Text, SafeAreaView, Image } from "react-native";
+import { View, Text, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import React, { useEffect, useState } from "react";
 import Images from "../../constants/Images";
-import { TouchableOpacity } from "react-native";
 import { router } from "expo-router";
 import SplashScreen from "../../components/SplashScreen";
 
@@ -24,6 +23,7 @@ const index = () => {
         setLoader(false);
       });
   }, []);
+
   return (
     <SafeAreaView style={{ flex: 1, padding: 10 }}>
       {loader ? (
@@ -40,14 +40,13 @@ const index = () => {
             <TouchableOpacity
               key={index}
               style={{
-                width: "30%",
-                marginBottom: 16,
+                width: "48%", // Ensures 2 items per row
+                marginBottom: 16, // Space between rows
                 alignItems: "center",
                 justifyContent: "center",
                 backgroundColor: "white",
                 borderRadius: 10,
                 padding: 10,
-                alignItems: "center",
                 shadowColor: "#000",
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.1,

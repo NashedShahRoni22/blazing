@@ -53,7 +53,7 @@ const index = () => {
               color="white"
               style={styles.icon}
             />
-            <Text style={styles.buttonText}>Transfer{"\n"}Balance</Text>
+            <Text style={styles.buttonText}>Transfer Balance</Text>
           </TouchableOpacity>
 
           {/* Withdraw Balance Button */}
@@ -68,7 +68,7 @@ const index = () => {
               color="white"
               style={styles.icon}
             />
-            <Text style={styles.buttonText}>Withdraw{"\n"}Balance</Text>
+            <Text style={styles.buttonText}>Withdraw Balance</Text>
           </TouchableOpacity>
 
           {/* Transaction History Button */}
@@ -83,7 +83,7 @@ const index = () => {
               color="white"
               style={styles.icon}
             />
-            <Text style={styles.buttonText}>Transection{"\n"}History</Text>
+            <Text style={styles.buttonText}>Transection History</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -123,19 +123,16 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   buttonsContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    gap: 14,
+    // Stack buttons vertically
     width: "100%",
   },
   button: {
     backgroundColor: "#E53935",
-    height: 120,
-    width: "48%",
+    height: 60, // Reduced height for vertical alignment
+    marginBottom: 14, // Space between buttons
     justifyContent: "center",
     alignItems: "center",
-    gap: 4,
+    flexDirection: "row", // Side by side alignment for icon and text
     borderRadius: 12,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
@@ -144,11 +141,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     elevation: 5, 
   },
+  icon: {
+    marginRight: 10, // Space between icon and text
+  },
   buttonText: {
     color: "#ffffff",
     fontSize: 18,
     textAlign: "center",
-    // fontWeight: "600",
+    fontWeight: "600", // Make the button text bold
   },
 });
 

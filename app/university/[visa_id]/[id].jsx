@@ -61,7 +61,7 @@ const UniversityDetails = () => {
                 shadowOpacity: 0.1,
                 shadowRadius: 4,
                 padding: 10,
-                gap: 4,
+                gap: 8,
               }}
               onPress={() => router.push(`/universityDetails/${item?.id}`)}
             >
@@ -69,7 +69,7 @@ const UniversityDetails = () => {
                 source={Images?.university}
                 style={{ height: 48, width: 48 }}
               />
-              <Text style={{ fontSize: 18, fontWeight: "600" }}>
+              <Text style={{ fontSize: 18}}>
                 {item?.name}
               </Text>
             </TouchableOpacity>
