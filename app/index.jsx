@@ -74,7 +74,7 @@ const index = () => {
       <SafeAreaView style={{ flex: 1 }}>
         <View
           style={{
-            backgroundColor: "#9D1F31", // primary color
+            backgroundColor: "#9D1F31",
             height: "30%",
             justifyContent: "center",
             alignItems: "center",
@@ -122,7 +122,7 @@ const index = () => {
           <TouchableOpacity
             activeOpacity={0.7}
             style={{
-              backgroundColor: "#9D1F31", // primary color
+              backgroundColor: "#9D1F31",
               height: 56,
               justifyContent: "center",
               alignItems: "center",

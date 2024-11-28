@@ -1,10 +1,4 @@
-import {
-  Text,
-  SafeAreaView,
-  View,
-  StyleSheet,
-  Dimensions,
-} from "react-native";
+import { Text, SafeAreaView, View, StyleSheet, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import SplashScreen from "../../components/SplashScreen";
@@ -26,10 +20,7 @@ const appartmentDetails = () => {
         if (data?.status === "success") {
           // Extract variables from the data
           setData(data?.data);
-          console.log(data.data);
-
-          const { title, imageUrl, description, videoUrl, details } =
-            data?.data;
+          const { details } = data?.data;
 
           // Clean the details field (for YouTube URLs and backslashes)
           let cleanedDetails = details?.replace(/\\/g, ""); // Remove backslashes
@@ -99,12 +90,14 @@ const appartmentDetails = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, padding: 10, backgroundColor: '#fff' }}>
-      <View style={{padding: 10}}>
+    <SafeAreaView style={{ flex: 1, padding: 10, backgroundColor: "#fff" }}>
+      <View style={{ padding: 10 }}>
         <Text style={styles.title}>{data?.title}</Text>
         <Text style={styles.area}>Area: {data?.area}</Text>
         <Text style={styles.price}>Price: {data?.price}</Text>
-        <Text style={styles.referenceId}>Reference ID: {data?.reference_id}</Text>
+        <Text style={styles.referenceId}>
+          Reference ID: {data?.reference_id}
+        </Text>
       </View>
       <WebView
         originWhitelist={["*"]}

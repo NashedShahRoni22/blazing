@@ -50,18 +50,28 @@ const Index = () => {
               }}
             >
               <View>
-                <Text style={{ fontSize: 16, fontFamily: "Montserrat_600SemiBold" }}>
+                <Text
+                  style={{ fontSize: 16, fontFamily: "Montserrat_600SemiBold" }}
+                >
                   {item?.title}
                 </Text>
-                <Text style={{ color: "#808080", fontSize: 14, marginVertical: 3, fontFamily: "Montserrat_400Regular" }}>
+                <Text
+                  style={{
+                    color: "#808080",
+                    fontSize: 14,
+                    marginVertical: 3,
+                    fontFamily: "Montserrat_400Regular",
+                  }}
+                >
                   {item?.area}
                 </Text>
-                <Text style={{ fontSize: 14, fontFamily: "Montserrat_600SemiBold" }}>
+                <Text
+                  style={{ fontSize: 14, fontFamily: "Montserrat_600SemiBold" }}
+                >
                   ${item?.price}
                 </Text>
               </View>
-              <TouchableOpacity
-                activeOpacity={0.7}
+              <View
                 style={{
                   backgroundColor: "#9D1F31",
                   height: 30,
@@ -76,19 +86,20 @@ const Index = () => {
                 }}
               >
                 <TouchableOpacity
+                  activeOpacity={0.7}
                   onPress={() => router.push(`/appartmentDetails/${item?.id}`)}
                 >
                   <Text
                     style={{
                       color: "white",
                       fontSize: 10,
-                      fontFamily: "Montserrat_600SemiBold"
+                      fontFamily: "Montserrat_600SemiBold",
                     }}
                   >
                     View Details
                   </Text>
                 </TouchableOpacity>
-              </TouchableOpacity>
+              </View>
             </View>
           )}
           keyExtractor={(item) => item.id.toString()}

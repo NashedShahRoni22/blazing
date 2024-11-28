@@ -81,7 +81,7 @@ const index = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 10 }}>
-      <Text style={{ textAlign: "justify", color: "#241147", fontWeight: "600" }}>
+      <Text style={{ textAlign: "justify", color: "#241147", fontFamily:"Montserrat_600SemiBold" }}>
         Before withdrawal, please check again that the amount you want to
         withdraw is correct. Once the request is processed, it cannot be canceled.
         For any wrong transactions, we are not liable.{" "}
@@ -134,13 +134,14 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 8,
     color: "#241147",
+    fontFamily:"Montserrat_400Regular",
   },
   amountLabel: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
   amountLabelText: {
-    fontWeight: "600",
+    fontFamily:"Montserrat_600SemiBold",
     color: "#E53935",
   },
   input: {
@@ -149,14 +150,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     paddingLeft: 10,
+    fontFamily:"Montserrat_400Regular",
     fontSize: 14,
   },
   button: {
-    backgroundColor: "#E53935",
-    height: 50,
+    backgroundColor: "#9D1F31",
+    height: 56,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 12,
+    borderRadius: 25,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,

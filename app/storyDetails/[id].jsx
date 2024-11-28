@@ -19,8 +19,7 @@ const storyDetails = () => {
       .then((data) => {
         if (data?.status === "success") {
           // Extract variables from the data
-          const { title, imageUrl, description, videoUrl, details } =
-            data?.data;
+          const { details } = data?.data;
 
           // Clean the details field (for YouTube URLs and backslashes)
           let cleanedDetails = details?.replace(/\\/g, ""); // Remove backslashes

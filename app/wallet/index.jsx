@@ -111,29 +111,28 @@ const styles = StyleSheet.create({
   balanceLabel: {
     color: "#9D1F31",
     textAlign: "center",
-    fontSize: 20,
-    fontWeight: "600",
+    fontSize: 18,
+    fontFamily: "Montserrat_600SemiBold",
     marginBottom: 5,
   },
   balanceAmount: {
     color: "#9D1F31",
     textAlign: "center",
-    fontSize: 40,
-    fontWeight: "600",
+    fontSize: 36,
+    fontFamily: "Montserrat_600SemiBold",
     marginBottom: 24,
   },
   buttonsContainer: {
-    // Stack buttons vertically
     width: "100%",
   },
   button: {
-    backgroundColor: "#E53935",
-    height: 60, // Reduced height for vertical alignment
-    marginBottom: 14, // Space between buttons
+    backgroundColor: "#9D1F31",
+    height: 56, 
+    marginBottom: 14, 
     justifyContent: "center",
     alignItems: "center",
-    flexDirection: "row", // Side by side alignment for icon and text
-    borderRadius: 12,
+    flexDirection: "row",
+    borderRadius: 25,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -142,13 +141,13 @@ const styles = StyleSheet.create({
     elevation: 5, 
   },
   icon: {
-    marginRight: 10, // Space between icon and text
+    marginRight: 10, 
   },
   buttonText: {
     color: "#ffffff",
-    fontSize: 18,
+    fontSize: 16,
     textAlign: "center",
-    fontWeight: "600", // Make the button text bold
+    fontFamily: "Montserrat_600SemiBold",
   },
 });
 

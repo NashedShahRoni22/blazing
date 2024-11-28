@@ -58,7 +58,7 @@ const Home = () => {
         {/* header: user information */}
         <View
           style={{
-            backgroundColor: "#9D1F31", // primary color
+            backgroundColor: "#9D1F31",
             flexDirection: "row",
             alignItems: "center",
             paddingVertical: 30,

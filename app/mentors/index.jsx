@@ -35,7 +35,7 @@ const index = () => {
             return (
               <TouchableOpacity
                 style={{
-                  padding: 10,
+                  padding: 20,
                   backgroundColor: "white",
                   borderRadius: 10,
                   marginTop: 10,
@@ -49,7 +49,7 @@ const index = () => {
                 }}
                 onPress={() => router.push(`/mentorsDetails/${item?.id}`)}
               >
-                <Text style={{ fontSize: 18 }}>{item?.name}</Text>
+                <Text style={{ fontSize: 16, fontFamily: "Montserrat_600SemiBold", }}>{item?.name}</Text>
               </TouchableOpacity>
             );
           }}

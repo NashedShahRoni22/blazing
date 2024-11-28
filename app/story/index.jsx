@@ -52,21 +52,15 @@ const index = () => {
                 <View style={{ flexDirection: "row", gap: 4, alignItems:"center" }}>
                   <Image source={Images.user} style={{height:64, width:64, borderRadius:50}}/>
                   <View>
-                    <Text style={{ fontSize: 16, fontWeight: "600" }}>
+                    <Text style={{ fontSize: 16, fontFamily:"Montserrat_600SemiBold" }}>
                       {item?.name}
                     </Text>
-                    {/* <Text style={{ color: "#808080"}}>
-                      {item?.details}
-                    </Text> */}
-                    {/* <Text style={{ fontSize: 16, fontWeight: "600" }}>
-                      Shift in {item.year}
-                    </Text> */}
                   </View>
                 </View>
                 <TouchableOpacity
                   activeOpacity={0.7}
                   style={{
-                    backgroundColor: "#FF6347", // primary color (can change as needed)
+                    backgroundColor: "#9D1F31", 
                     height: 30,
                     justifyContent: "center",
                     alignItems: "center",
@@ -80,7 +74,7 @@ const index = () => {
                   onPress={() => router.push(`/storyDetails/${item?.id}`)}
                 >
                   <Text
-                    style={{ color: "white", fontSize: 12, fontWeight: "600" }}
+                    style={{ color: "white", fontSize: 10, fontFamily: "Montserrat_600SemiBold",}}
                   >
                     View Story
                   </Text>

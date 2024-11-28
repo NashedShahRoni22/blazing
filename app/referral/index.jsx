@@ -134,7 +134,7 @@ const index = () => {
                   <Text
                     style={{
                       fontSize: 18,
-                      fontWeight: "600",
+                      fontFamily: "Montserrat_600SemiBold",
                       color: isPending ? "gray" : "green", // Set color based on status
                     }}
                   >
@@ -143,6 +143,7 @@ const index = () => {
                   <Text
                     style={{
                       color: "#A3A3A3",
+                      fontFamily: "Montserrat_400Regular",
                     }}
                   >
                     #{item.id}
@@ -151,7 +152,7 @@ const index = () => {
                 <Text
                   style={{
                     fontSize: 18,
-                    fontWeight: "600",
+                    fontFamily: "Montserrat_600SemiBold",
                     color: isPending ? "gray" : "green", // Set color based on status
                   }}
                 >
@@ -167,6 +168,7 @@ const index = () => {
                 <Text
                   style={{
                     color: "#A3A3A3",
+                    fontFamily: "Montserrat_500Medium",
                   }}
                 >
                   {item.email}
@@ -174,6 +176,7 @@ const index = () => {
                 <Text
                   style={{
                     color: "#A3A3A3",
+                    fontFamily: "Montserrat_500Medium",
                   }}
                 >
                   {item.date}

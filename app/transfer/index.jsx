@@ -86,7 +86,7 @@ const index = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 10 }}>
-      <Text style={{ textAlign: "justify", color: "#241147", fontWeight: "600" }}>
+      <Text style={{ textAlign: "justify", color: "#241147", fontFamily:"Montserrat_600SemiBold" }}>
         Before transfer, please check again that the user's email is correct.
         Once the transfer is done, you cannot cancel the transfer. For any wrong
         transactions, we are not liable.
@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     marginBottom: 8,
+    fontFamily:"Montserrat_400Regular",
     color: "#241147",
   },
   amountLabel: {
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   amountLabelText: {
-    fontWeight: "600",
+    fontFamily:"Montserrat_600SemiBold",
     color: "#E53935",
   },
   input: {
@@ -165,13 +166,14 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingLeft: 10,
     fontSize: 14,
+    fontFamily:"Montserrat_400Regular",
   },
   button: {
-    backgroundColor: "#E53935",
-    height: 50,
+    backgroundColor: "#9D1F31",
+    height: 56,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 12,
+    borderRadius: 25,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,

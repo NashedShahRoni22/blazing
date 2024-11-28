@@ -88,7 +88,7 @@ const index = () => {
 const styles = StyleSheet.create({
   card: {
     padding: 10,
-    backgroundColor: "white", // White background for the card
+    backgroundColor: "white",
     borderRadius: 10,
     marginTop: 10,
     shadowColor: "#000",
@@ -108,14 +108,14 @@ const styles = StyleSheet.create({
   },
   statusText: {
     fontSize: 18,
-    fontWeight: "600",
+    fontFamily:"Montserrat_600SemiBold"
   },
   idText: {
     color: "#A3A3A3",
   },
   amountText: {
     fontSize: 18,
-    fontWeight: "600",
+    fontFamily:"Montserrat_600SemiBold"
   },
   cardFooter: {
     flexDirection: "row",
@@ -123,6 +123,7 @@ const styles = StyleSheet.create({
   },
   emailText: {
     color: "#A3A3A3",
+    fontFamily:"Montserrat_600SemiBold"
   },
   dateText: {
     color: "#A3A3A3",
@@ -131,6 +132,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#A3A3A3",
     marginTop: 10,
+    fontFamily:"Montserrat_400Regular"
   },
 });
 

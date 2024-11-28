@@ -11,7 +11,7 @@ const Login = () => {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#9D1F31", // primary color
+        backgroundColor: "#9D1F31",
       }}
     >
       <View
