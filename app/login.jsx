@@ -11,21 +11,21 @@ const Login = () => {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#E53935", // primary color
+        backgroundColor: "#9D1F31", // primary color
       }}
     >
       <View
         style={{
-          paddingHorizontal: 20,
+          paddingHorizontal: 30,
           width: "100%",
           alignItems: "center",
         }}
       >
-        <Image source={Images.logo} style={{ height: 74, width: 220 }} />
+        <Image source={Images.logo} style={{ height: 80, width: 240 }} />
         <TouchableOpacity
           activeOpacity={0.7}
           style={{
-            marginTop: 63,
+            marginTop: 30,
             backgroundColor: "white",
             width: "100%",
             height: 56,
@@ -44,9 +44,9 @@ const Login = () => {
           <Text
             style={{
               color: "#808080",
-              fontSize: 18,
+              fontSize: 16,
               marginLeft: 8,
-              fontWeight: "600",
+              fontFamily: "Montserrat_600SemiBold",
             }}
           >
             Continue with Google

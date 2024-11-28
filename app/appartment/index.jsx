@@ -39,7 +39,7 @@ const Index = () => {
                 padding: 10,
                 backgroundColor: "white",
                 borderRadius: 10,
-                marginTop: 10,
+                marginBottom: 10,
                 flexDirection: "row",
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -50,20 +50,20 @@ const Index = () => {
               }}
             >
               <View>
-                <Text style={{ fontSize: 16, fontWeight: "600" }}>
+                <Text style={{ fontSize: 16, fontFamily: "Montserrat_600SemiBold" }}>
                   {item?.title}
                 </Text>
-                <Text style={{ color: "#808080", marginVertical: 5 }}>
+                <Text style={{ color: "#808080", fontSize: 14, marginVertical: 3, fontFamily: "Montserrat_400Regular" }}>
                   {item?.area}
                 </Text>
-                <Text style={{ fontSize: 16, fontWeight: "600" }}>
+                <Text style={{ fontSize: 14, fontFamily: "Montserrat_600SemiBold" }}>
                   ${item?.price}
                 </Text>
               </View>
               <TouchableOpacity
                 activeOpacity={0.7}
                 style={{
-                  backgroundColor: "#FF6347",
+                  backgroundColor: "#9D1F31",
                   height: 30,
                   justifyContent: "center",
                   alignItems: "center",
@@ -81,8 +81,8 @@ const Index = () => {
                   <Text
                     style={{
                       color: "white",
-                      fontSize: 12,
-                      fontWeight: "600",
+                      fontSize: 10,
+                      fontFamily: "Montserrat_600SemiBold"
                     }}
                   >
                     View Details

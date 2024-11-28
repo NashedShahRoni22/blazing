@@ -22,7 +22,7 @@ const index = () => {
   const DATA = [
     {
       image: Images.visa,
-      title: "Visa Service",
+      title: "Visa Services",
     },
     {
       image: Images.ticket,
@@ -99,7 +99,7 @@ const index = () => {
               key={index}
               style={{
                 width: "30%",
-                marginBottom: 16,
+                marginBottom: 20,
                 alignItems: "center",
                 gap: 4,
               }}

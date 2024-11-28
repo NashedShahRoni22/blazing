@@ -41,7 +41,7 @@ const index = () => {
               key={index}
               style={{
                 width: "48%", // Ensures 2 items per row
-                marginBottom: 16, // Space between rows
+                marginBottom: 15, // Space between rows
                 alignItems: "center",
                 justifyContent: "center",
                 backgroundColor: "white",
@@ -51,7 +51,7 @@ const index = () => {
                 shadowOffset: { width: 0, height: 2 },
                 shadowOpacity: 0.1,
                 shadowRadius: 4,
-                gap: 4,
+                gap: 8,
               }}
               onPress={() => router.push(`/country/${data?.id}`)}
             >
@@ -59,7 +59,7 @@ const index = () => {
                 source={Images.student}
                 style={{ height: 64, width: 64 }}
               />
-              <Text style={{ fontSize: 16, textAlign: "center" }}>
+              <Text style={{ fontSize: 14, textAlign: "center", fontFamily: "Montserrat_600SemiBold", }}>
                 {data?.name}
               </Text>
             </TouchableOpacity>

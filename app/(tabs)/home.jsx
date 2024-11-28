@@ -18,7 +18,7 @@ const Home = () => {
     },
     {
       image: Images.house,
-      title: "Appartment",
+      title: "Properties",
       link: "appartment",
     },
     {
@@ -43,7 +43,7 @@ const Home = () => {
     },
     {
       image: Images.faq,
-      title: "Faq",
+      title: "FAQ",
       link: "faq",
     },
     {
@@ -58,26 +58,26 @@ const Home = () => {
         {/* header: user information */}
         <View
           style={{
-            backgroundColor: "#E53935", // primary color
+            backgroundColor: "#9D1F31", // primary color
             flexDirection: "row",
             alignItems: "center",
-            paddingVertical:40,
+            paddingVertical: 30,
             paddingHorizontal: 20,
             justifyContent: "space-between",
           }}
         >
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 10, width: '75%', overflow: 'hidden' }}>
             {/* User Image */}
             <Image
               source={Images.user}
-              style={{ height: 64, width: 64, borderRadius: 32 }}
+              style={{ height: 60, width: 60, borderRadius: 30 }}
             />
             <View>
-              <Text style={{ color: "white", fontSize: 14, fontWeight: "600" }}>
-                John Deo
+              <Text style={{ color: "white", fontSize: 14, fontFamily: "Montserrat_600SemiBold", }}>
+                Mohammad Ashraf
               </Text>
-              <Text style={{ color: "white", fontSize: 14, fontWeight: "600" }}>
-                john@gmail.com
+              <Text style={{ color: "white", fontSize: 12, fontFamily: "Montserrat_400Regular", }}>
+                mohammadashraf@gmail.com
               </Text>
             </View>
           </View>
@@ -98,24 +98,27 @@ const Home = () => {
             }}
             onPress={() => router.push("/wallet")}
           >
-            <Text style={{ color: "black", fontSize: 12, fontWeight: "600" }}>
+            <Text style={{ color: "black", fontSize: 12, fontFamily: "Montserrat_600SemiBold" }}>
               Wallet
             </Text>
           </TouchableOpacity>
         </View>
 
         {/* body: features cards */}
-        <View style={{ paddingHorizontal: 20, marginTop: 20 }}>
+        <View style={{ paddingHorizontal: 10, marginTop: 10 }}>
           <Image
             source={Images.Homebanner}
-            style={{ height: 150, width: "100%" }}
+            style={{ height: 150, width: "100%", borderRadius: 10 }}
           />
+        </View>
+        <View style={{paddingHorizontal: 20}}>
           <View
             style={{
               flexDirection: "row",
               flexWrap: "wrap",
               justifyContent: "space-between",
               marginTop: 30,
+              
             }}
           >
             {DATA.map((data, index) => (
@@ -123,14 +126,14 @@ const Home = () => {
                 key={index}
                 style={{
                   width: "30%",
-                  marginBottom: 16,
+                  marginBottom: 20,
                   alignItems: "center",
                   gap: 4,
                 }}
                 onPress={() => router.push(`${data?.link}`)}
               >
                 <Image source={data.image} style={{ height: 48, width: 48 }} />
-                <Text>{data.title}</Text>
+                <Text style={{fontFamily: "Montserrat_600SemiBold", fontSize: 12, textAlign: "center"}}>{data.title}</Text>
               </TouchableOpacity>
             ))}
           </View>

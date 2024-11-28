@@ -1,7 +1,7 @@
 import {
   Text,
   SafeAreaView,
-  ScrollView,
+  View,
   StyleSheet,
   Dimensions,
 } from "react-native";
@@ -99,11 +99,13 @@ const appartmentDetails = () => {
   }
 
   return (
-    <SafeAreaView style={{ flex: 1, padding: 10 }}>
-      <Text style={styles.title}>{data?.title}</Text>
-      <Text style={styles.area}>Area: {data?.area}</Text>
-      <Text style={styles.price}>Price: {data?.price}</Text>
-      <Text style={styles.referenceId}>Reference ID: {data?.reference_id}</Text>
+    <SafeAreaView style={{ flex: 1, padding: 10, backgroundColor: '#fff' }}>
+      <View style={{padding: 10}}>
+        <Text style={styles.title}>{data?.title}</Text>
+        <Text style={styles.area}>Area: {data?.area}</Text>
+        <Text style={styles.price}>Price: {data?.price}</Text>
+        <Text style={styles.referenceId}>Reference ID: {data?.reference_id}</Text>
+      </View>
       <WebView
         originWhitelist={["*"]}
         source={{ html: iframeHtml }}
@@ -117,23 +119,26 @@ const appartmentDetails = () => {
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: 22,
-    fontWeight: "bold",
-    marginBottom: 10,
+    fontSize: 18,
+    fontFamily: "Montserrat_600SemiBold",
+    marginBottom: 5,
   },
   area: {
     fontSize: 16,
     color: "#555",
-    marginBottom: 8,
+    marginBottom: 5,
+    fontFamily: "Montserrat_500Medium",
   },
   price: {
     fontSize: 16,
-    color: "#E53935",
-    marginBottom: 8,
+    color: "#9D1F31",
+    marginBottom: 5,
+    fontFamily: "Montserrat_600SemiBold",
   },
   referenceId: {
-    fontSize: 16,
-    marginBottom: 8,
+    fontSize: 12,
+    marginBottom: 5,
+    fontFamily: "Montserrat_400Regular",
   },
   htmlContent: {
     fontSize: 16,

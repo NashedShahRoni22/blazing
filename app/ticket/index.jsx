@@ -130,7 +130,7 @@ const index = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, padding: 16 }}>
+    <SafeAreaView style={{ flex: 1, padding: 20 }}>
       <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
         {/* Full Name */}
         <View style={styles.inputContainer}>
@@ -260,31 +260,31 @@ const index = () => {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    marginBottom: 12,
+    marginBottom: 10,
   },
   label: {
-    fontSize: 16,
-    fontWeight: "500",
+    fontSize: 14,
     marginBottom: 8,
+    fontFamily: "Montserrat_600SemiBold"
   },
   input: {
-    height: 40,
     borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 8,
     paddingLeft: 10,
-    fontSize: 16,
+    fontSize: 12,
+    fontFamily: "Montserrat_400Regular"
   },
   picker: {
-    height: 50,
     borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 8,
     fontSize: 16,
     marginBottom: 16,
+    fontFamily: "Montserrat_400Regular",
   },
   button: {
-    backgroundColor: "#E53935",
+    backgroundColor: "#9D1F31",
     height: 50,
     justifyContent: "center",
     alignItems: "center",
@@ -293,12 +293,14 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 3.5,
-    marginTop: 24,
+    marginTop: 10,
+    fontFamily: "Montserrat_600SemiBold"
   },
   buttonText: {
     color: "#fff",
-    fontSize: 18,
-    fontWeight: "bold",
+    fontSize: 16,
+    fontFamily: "Montserrat_600SemiBold",
+    letterSpacing: 1
   },
 });
 

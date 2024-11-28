@@ -69,7 +69,7 @@ const UniversityDetails = () => {
                 source={Images?.university}
                 style={{ height: 48, width: 48 }}
               />
-              <Text style={{ fontSize: 18}}>
+              <Text style={{ fontSize: 16, fontFamily: "Montserrat_600SemiBold"}}>
                 {item?.name}
               </Text>
             </TouchableOpacity>

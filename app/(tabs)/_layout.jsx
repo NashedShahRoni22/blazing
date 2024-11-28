@@ -1,7 +1,6 @@
 import { Tabs } from "expo-router";
 import Colors from "../../constants/Colors";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 const TabsLayout = () => {
   return (
@@ -11,14 +10,15 @@ const TabsLayout = () => {
       tabBarActiveTintColor: Colors.white,
       tabBarInactiveTintColor:Colors.white,
       tabBarStyle: {
-        height: 70,
+        height: 80,
         backgroundColor: Colors.primary,
       },
       tabBarLabelStyle: {
         fontSize: 12,
-        fontWeight: "bold",
-        marginTop:4
+        fontFamily: "Montserrat_600SemiBold",
+        marginTop: 1
       },
+      
     }}
     >
       <Tabs.Screen
@@ -26,7 +26,7 @@ const TabsLayout = () => {
         options={{
           tabBarLabel: "Home",
           tabBarIcon: ({ color }) => ( 
-            <Ionicons name="home-outline" size={28} color={color} />
+            <Ionicons name="home-outline" size={24} color={color} />
           ),
         }}
       />
@@ -37,7 +37,7 @@ const TabsLayout = () => {
           tabBarIcon: ({ color }) => (
             <Ionicons
               name="chatbubble-ellipses-outline"
-              size={28}
+              size={24}
               color={color}
             />
           ),
@@ -48,7 +48,11 @@ const TabsLayout = () => {
         options={{
           tabBarLabel: "Profile",
           tabBarIcon: ({ color }) => (
-            <FontAwesome5 name="user" size={28} color={color} />
+            <Ionicons
+              name="person-outline"
+              size={24}
+              color={color}
+            />
           ),
         }}
       />
