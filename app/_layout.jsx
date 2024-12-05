@@ -12,7 +12,7 @@ const screenOptions = {
 const screens = [
   { name: 'visa/index', headerTitle: 'Visa Services' },
   { name: 'country/[id]', headerTitle: 'Countries' },
-  { name: 'university/[visa_id]/[id]', headerTitle: 'Visa' },
+  { name: 'university/[visa_id]/[id]', headerTitle: 'Universities' },
   { name: 'universityDetails/[id]', headerTitle: 'Visa Details' },
   { name: 'appartment/index', headerTitle: 'Properties' },
   { name: 'appartmentDetails/[id]', headerTitle: 'Property Details' },
