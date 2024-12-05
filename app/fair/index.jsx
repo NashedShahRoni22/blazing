@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, FlatList } from "react-native";
+import { View, Text, SafeAreaView, FlatList, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import SplashScreen from "../../components/SplashScreen";
@@ -26,40 +26,30 @@ const index = () => {
       });
   }, []);
   return (
-    <SafeAreaView style={{ flex: 1, padding: 10 }}>
+    <SafeAreaView style={{ flex: 1 }}>
       {loader ? (
         <SplashScreen />
       ) : (
         <FlatList
+          style={styles.flatList}
           data={fairs}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => {
             return (
-              <TouchableOpacity
-                style={{
-                  padding: 15,
-                  backgroundColor: "white",
-                  borderRadius: 10,
-                  marginBottom: 10,
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  shadowColor: "#000",
-                  shadowOffset: { width: 0, height: 2 },
-                  shadowOpacity: 0.1,
-                  shadowRadius: 4,
-                }}
-                onPress={() => router.push(`/faqDetails/${item?.id}`)}
-              >
-                <Text
-                  style={{ fontSize: 14, fontFamily: "Montserrat_600SemiBold", flexDirection: "row", flex:1 }}
-                >
-                  {item?.title}
-                </Text>
+              <View style={styles.propertyCard}>
                 <View>
-                  <Ionicons name="chevron-down-outline" size={24} />
+                  <Text style={styles.propertyTitle}>{item?.title}</Text>
+                  <Text style={styles.propertyPrice}>${item?.apply_fee}</Text>
                 </View>
-              </TouchableOpacity>
+                <View style={styles.viewDetailsButton}>
+                  <TouchableOpacity
+                    activeOpacity={0.7}
+                    onPress={() => router.push(`/fairDetails/${item?.id}`)}
+                  >
+                    <Text style={styles.viewDetailsText}>View Details</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
             );
           }}
         />
@@ -68,5 +58,51 @@ const index = () => {
     </SafeAreaView>
   );
 };
+
+// Styles for buttons and other components
+const styles = StyleSheet.create({
+  flatList: {
+    padding: 10,
+  },
+  propertyCard: {
+    padding: 10,
+    backgroundColor: "white",
+    borderRadius: 10,
+    marginBottom: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center"
+  },
+  propertyTitle: {
+    fontSize: 16,
+    fontFamily: "Montserrat_600SemiBold",
+  },
+  propertyPrice: {
+    fontSize: 14,
+    fontFamily: "Montserrat_600SemiBold",
+    marginTop: 10,
+  },
+  viewDetailsButton: {
+    backgroundColor: "#9D1F31",
+    height: 30,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 25,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    paddingHorizontal: 15,
+  },
+  viewDetailsText: {
+    color: "white",
+    fontSize: 12,
+    fontFamily: "Montserrat_600SemiBold",
+  },
+});
 
 export default index;

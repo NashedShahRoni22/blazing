@@ -6,9 +6,9 @@ import WebView from "react-native-webview";
 import { View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
-const faqDetails = () => {
+const fairDetails = () => {
   const { id } = useLocalSearchParams();  
-  const url = `https://nw71.tv/api/v1/faq/${id}`;  
+  const url = `https://nw71.tv/api/v1/fair/${id}`;  
   const [loader, setLoader] = useState(true);  
   const [iframeHtml, setIframeHtml] = useState("");
   const { width, height } = Dimensions.get("window");
@@ -110,4 +110,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default faqDetails;
+export default fairDetails;
