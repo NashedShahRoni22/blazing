@@ -3,6 +3,7 @@ import React from "react";
 import Images from "../constants/Images";
 import { TouchableOpacity } from "react-native";
 import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
 const Login = () => {
   return (
@@ -53,6 +54,7 @@ const Login = () => {
           </Text>
         </TouchableOpacity>
       </View>
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

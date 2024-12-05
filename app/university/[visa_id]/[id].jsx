@@ -9,6 +9,7 @@ import {
 import { router, useLocalSearchParams } from "expo-router";
 import SplashScreen from "../../../components/SplashScreen";
 import Images from "../../../constants/Images";
+import { StatusBar } from "expo-status-bar";
 
 const UniversityDetails = () => {
   const { visa_id, id } = useLocalSearchParams();
@@ -69,13 +70,14 @@ const UniversityDetails = () => {
                 source={Images?.university}
                 style={{ height: 48, width: 48 }}
               />
-              <Text style={{ fontSize: 16, fontFamily: "Montserrat_600SemiBold"}}>
+              <Text style={{ fontSize: 16, fontFamily: "Montserrat_600SemiBold", flexDirection: "row", flex:1 }}>
                 {item?.name}
               </Text>
             </TouchableOpacity>
           );
         }}
       />
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

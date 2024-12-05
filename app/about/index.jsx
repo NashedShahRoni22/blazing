@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import SplashScreen from "../../components/SplashScreen";
 import WebView from "react-native-webview";
+import { StatusBar } from "expo-status-bar";
 
 const index = () => {
   const { id } = useLocalSearchParams();
@@ -93,13 +94,13 @@ const index = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 10, backgroundColor: "#fff" }}>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         activeOpacity={0.7}
         style={styles.button}
         onPress={() => router.push("/mentors")}
       >
         <Text style={styles.buttonText}>Our Mentors</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       <WebView
         originWhitelist={["*"]}
         source={{ html: iframeHtml }}
@@ -107,6 +108,7 @@ const index = () => {
         javaScriptEnabled={true}
         scrollEnabled={false}
       />
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

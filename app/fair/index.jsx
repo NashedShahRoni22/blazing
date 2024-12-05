@@ -7,16 +7,16 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { StatusBar } from "expo-status-bar";
 
 const index = () => {
-  const url = "https://nw71.tv/api/v1/faqs?type=faq";
+  const url = "https://nw71.tv/api/v1/fairs";
   const [loader, setLoader] = useState(true);
-  const [faqs, setFaqs] = useState([]);
+  const [fairs, setFairs] = useState([]);
 
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         if (data?.status === "success") {
-          setFaqs(data?.data);
+          setFairs(data?.data);
         } else {
           console.log("Something went wrong");
         }
@@ -31,7 +31,7 @@ const index = () => {
         <SplashScreen />
       ) : (
         <FlatList
-          data={faqs}
+          data={fairs}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => {
             return (

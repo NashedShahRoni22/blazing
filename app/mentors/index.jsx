@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native";
 import SplashScreen from "../../components/SplashScreen";
 import { router } from "expo-router";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
+import { StatusBar } from "expo-status-bar";
 
 const index = () => {
   const url = "https://nw71.tv/api/v1/mentors";
@@ -51,18 +51,24 @@ const index = () => {
                 }}
                 onPress={() => router.push(`/mentorsDetails/${item?.id}`)}
               >
-                <Text style={{ fontSize: 14, fontFamily: "Montserrat_600SemiBold", width: '90%' }}>{item?.name}</Text>
-                <View style={{width:'6%'}}>
-                  <Ionicons
-                    name="chevron-down-outline"
-                    size={24}
-                  />
+                <Text
+                  style={{
+                    fontSize: 14,
+                    fontFamily: "Montserrat_600SemiBold",
+                    width: "90%",
+                  }}
+                >
+                  {item?.name}
+                </Text>
+                <View style={{ width: "6%" }}>
+                  <Ionicons name="chevron-down-outline" size={24} />
                 </View>
               </TouchableOpacity>
             );
           }}
         />
       )}
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

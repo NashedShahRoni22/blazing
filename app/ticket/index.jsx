@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { StatusBar } from "expo-status-bar";
 
 const index = () => {
   const [formData, setFormData] = useState({
@@ -240,7 +241,7 @@ const index = () => {
           {isSubmitting ? (
             <ActivityIndicator size="small" color="#ffffff" />
           ) : (
-            <Text style={styles.buttonText}>Request Air Ticket</Text>
+            <Text style={styles.buttonText}>Submit</Text>
           )}
         </TouchableOpacity>
       </ScrollView>
@@ -254,6 +255,7 @@ const index = () => {
           onChange={onDateChange}
         />
       )}
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

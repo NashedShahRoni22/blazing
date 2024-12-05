@@ -9,6 +9,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
 import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import SplashScreen from "../../components/SplashScreen";
 
 const index = () => {
   const [formData, setFormData] = useState({
@@ -17,17 +19,19 @@ const index = () => {
   });
 
   const [balance, setBalance] = useState("00.00");
-  const [loading, setLoading] = useState(false); // Loading state for the spinner
+  const [loading, setLoading] = useState(false);
+  const [getLoading, setGetLoading] = useState(false);
 
   const url = "https://nw71.tv/api/v1/wallet";
 
   useEffect(() => {
+    setGetLoading(true);
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         if (data.status === "success") {
-          // Format the amount to always have two decimal places
           setBalance(parseFloat(data?.data?.amount).toFixed(2));
+          setGetLoading(false);
         } else {
           alert(data?.message);
         }
@@ -57,7 +61,7 @@ const index = () => {
 
         if (data.status === "success") {
           alert("Transfer successful");
-          router.push("/wallet");;
+          router.push("/wallet");
         } else {
           alert("Transfer failed: " + data.message);
         }
@@ -80,63 +84,79 @@ const index = () => {
   const isButtonDisabled = () => {
     const enteredAmount = parseFloat(formData.amount);
     return (
-      isNaN(enteredAmount) || enteredAmount <= 0 || enteredAmount > balance || !formData.email
+      isNaN(enteredAmount) ||
+      enteredAmount <= 0 ||
+      enteredAmount > balance ||
+      !formData.email
     );
   };
 
   return (
     <SafeAreaView style={{ flex: 1, padding: 10 }}>
-      <Text style={{ textAlign: "justify", color: "#241147", fontFamily:"Montserrat_600SemiBold" }}>
-        Before transfer, please check again that the user's email is correct.
-        Once the transfer is done, you cannot cancel the transfer. For any wrong
-        transactions, we are not liable.
-      </Text>
-
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Receiver Email</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Receiver Email"
-          value={formData.email}
-          onChangeText={(text) => handleChange("email", text)}
-        />
-      </View>
-
-      <View style={styles.inputContainer}>
-        <View style={styles.amountLabel}>
-          <Text style={styles.label}>Enter Amount</Text>
-          <Text style={styles.amountLabelText}>
-            Available Amount ${balance}
+      {getLoading ? (
+        <SplashScreen />
+      ) : (
+        <>
+          <Text
+            style={{
+              textAlign: "justify",
+              color: "#241147",
+              fontFamily: "Montserrat_600SemiBold",
+            }}
+          >
+            Before transfer, please check again that the user's email is
+            correct. Once the transfer is done, you cannot cancel the transfer.
+            For any wrong transactions, we are not liable.
           </Text>
-        </View>
-        <TextInput
-          style={styles.input}
-          placeholder="Enter Amount"
-          value={formData.amount}
-          onChangeText={(text) => {
-            // Only update amount if the text is a valid number
-            if (/^\d*\.?\d*$/.test(text)) {
-              handleChange("amount", text);
-            }
-          }}
-          keyboardType="numeric" // Ensure user inputs numbers only
-        />
-      </View>
 
-      <TouchableOpacity
-        activeOpacity={0.7}
-        style={[styles.button, isButtonDisabled() && styles.buttonDisabled]} // Disable button if needed
-        onPress={handleSubmit}
-        disabled={isButtonDisabled()} // Disable button when amount is invalid
-      >
-        {loading ? (
-          <ActivityIndicator size="small" color="#ffffff" />
-        ) : (
-          <Text style={styles.buttonText}>
-            Transfer {formData.amount && `$${formData.amount}`}
-          </Text>
-        )}
-      </TouchableOpacity>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Receiver Email</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Receiver Email"
+              value={formData.email}
+              onChangeText={(text) => handleChange("email", text)}
+            />
+          </View>
+
+          <View style={styles.inputContainer}>
+            <View style={styles.amountLabel}>
+              <Text style={styles.label}>Enter Amount</Text>
+              <Text style={styles.amountLabelText}>
+                Available Amount ${balance}
+              </Text>
+            </View>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter Amount"
+              value={formData.amount}
+              onChangeText={(text) => {
+                // Only update amount if the text is a valid number
+                if (/^\d*\.?\d*$/.test(text)) {
+                  handleChange("amount", text);
+                }
+              }}
+              keyboardType="numeric" // Ensure user inputs numbers only
+            />
+          </View>
+
+          <TouchableOpacity
+            activeOpacity={0.7}
+            style={[styles.button, isButtonDisabled() && styles.buttonDisabled]} // Disable button if needed
+            onPress={handleSubmit}
+            disabled={isButtonDisabled()} // Disable button when amount is invalid
+          >
+            {loading ? (
+              <ActivityIndicator size="small" color="#ffffff" />
+            ) : (
+              <Text style={styles.buttonText}>
+                Transfer {formData.amount && `$${formData.amount}`}
+              </Text>
+            )}
+          </TouchableOpacity>
+        </>
+      )}
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };
@@ -148,7 +168,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     marginBottom: 8,
-    fontFamily:"Montserrat_400Regular",
+    fontFamily: "Montserrat_400Regular",
     color: "#241147",
   },
   amountLabel: {
@@ -156,7 +176,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   amountLabelText: {
-    fontFamily:"Montserrat_600SemiBold",
+    fontFamily: "Montserrat_600SemiBold",
     color: "#E53935",
   },
   input: {
@@ -166,7 +186,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     paddingLeft: 10,
     fontSize: 14,
-    fontFamily:"Montserrat_400Regular",
+    fontFamily: "Montserrat_400Regular",
   },
   button: {
     backgroundColor: "#9D1F31",

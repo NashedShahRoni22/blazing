@@ -4,6 +4,7 @@ import { useLocalSearchParams } from "expo-router";
 import SplashScreen from "../../components/SplashScreen";
 import RenderHTML from "react-native-render-html";
 import WebView from "react-native-webview";
+import { StatusBar } from "expo-status-bar";
 
 const jobDetails = () => {
   const { id } = useLocalSearchParams();
@@ -106,6 +107,7 @@ const jobDetails = () => {
         javaScriptEnabled={true}
         scrollEnabled={false}
       />
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

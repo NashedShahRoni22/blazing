@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import SplashScreen from "../../components/SplashScreen";
 import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
 const index = () => {
   const url = "https://nw71.tv/api/v1/job";
@@ -25,6 +26,33 @@ const index = () => {
   }, []);
   return (
     <SafeAreaView style={{ flex: 1, padding: 10 }}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={{
+          backgroundColor: "#9D1F31",
+          height: 56,
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 12,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+          marginBottom:10,
+        }}
+        onPress={() => router.push("/addJob")}
+      >
+        <Text
+          style={{
+            color: "white",
+            fontSize: 18,
+            fontFamily: "Montserrat_600SemiBold",
+            letterSpacing: 1,
+          }}
+        >
+          Add Job
+        </Text>
+      </TouchableOpacity>
       {loader ? (
         <SplashScreen />
       ) : (
@@ -53,7 +81,13 @@ const index = () => {
                 >
                   {item?.title}
                 </Text>
-                <View style={{flexDirection:"row",justifyContent:"space-between",alignItems:"flex-end"}}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "flex-end",
+                  }}
+                >
                   <View>
                     <Text
                       style={{
@@ -107,6 +141,7 @@ const index = () => {
           }}
         />
       )}
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

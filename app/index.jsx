@@ -17,6 +17,7 @@ import {
   Montserrat_800ExtraBold,
   Montserrat_900Black,
 } from "@expo-google-fonts/montserrat";
+import { StatusBar } from "expo-status-bar";
 
 const index = () => {
   const DATA = [
@@ -146,6 +147,7 @@ const index = () => {
             </Text>
           </TouchableOpacity>
         </View>
+        <StatusBar style="light" />
       </SafeAreaView>
     );
   }

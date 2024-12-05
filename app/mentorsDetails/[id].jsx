@@ -1,14 +1,21 @@
-import { Text, SafeAreaView, ScrollView, StyleSheet, Dimensions } from "react-native";
+import {
+  Text,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import SplashScreen from "../../components/SplashScreen";
-import RenderHTML from 'react-native-render-html';
+import RenderHTML from "react-native-render-html";
 import WebView from "react-native-webview";
 import { View } from "react-native";
+import { StatusBar } from "expo-status-bar";
 
 const mentorsDetails = () => {
-  const { id } = useLocalSearchParams();  
-  const url = `https://nw71.tv/api/v1/mentor/${id}`;  
+  const { id } = useLocalSearchParams();
+  const url = `https://nw71.tv/api/v1/mentor/${id}`;
   const [iframeHtml, setIframeHtml] = useState("");
   const [loader, setLoader] = useState(true);
 
@@ -98,9 +105,9 @@ const mentorsDetails = () => {
         javaScriptEnabled={true}
         scrollEnabled={false}
       />
+      <StatusBar style="light" />
     </View>
   );
 };
-
 
 export default mentorsDetails;

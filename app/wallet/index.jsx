@@ -11,82 +11,92 @@ import React, { useEffect, useState } from "react";
 import Images from "../../constants/Images";
 import { router } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons"; // Import FontAwesome icons
+import SplashScreen from "../../components/SplashScreen";
+import { StatusBar } from "expo-status-bar";
 
 const index = () => {
-  const [amount, setAmount] = useState("00.00");
+  const [amount, setAmount] = useState("");
+  const [loader, setLoader] = useState(false);
   const url = "https://nw71.tv/api/v1/wallet";
 
   useEffect(() => {
+    setLoader(true);
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
-        if(data.status === "success"){
+        if (data.status === "success") {
           // Format the amount to always have two decimal places
           setAmount(parseFloat(data?.data?.amount).toFixed(2));
-        }
-        else{
+          setLoader(false);
+        } else {
           alert(data?.message);
+          setLoader(false);
         }
       });
   }, []);
 
   return (
-    <SafeAreaView style={{flex:1}}>
-      <ScrollView contentContainerStyle={styles.container}>
-        {/* Image - Centered */}
-        <Image source={Images.wallet} style={styles.image} />
+    <SafeAreaView style={{ flex: 1 }}>
+      {loader ? (
+        <SplashScreen />
+      ) : (
+        <ScrollView contentContainerStyle={styles.container}>
+          {/* Image - Centered */}
+          <Image source={Images.wallet} style={styles.image} />
 
-        {/* Balance Text */}
-        <Text style={styles.balanceLabel}>Balance</Text>
-        <Text style={styles.balanceAmount}>${amount}</Text>
+          {/* Balance Text */}
+          <Text style={styles.balanceLabel}>Balance</Text>
+          <Text style={styles.balanceAmount}>${amount}</Text>
 
-        <View style={styles.buttonsContainer}>
-          {/* Transfer Balance Button */}
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.button}
-            onPress={() => router.push("/transfer")}
-          >
-            <FontAwesome
-              name="send"
-              size={28}
-              color="white"
-              style={styles.icon}
-            />
-            <Text style={styles.buttonText}>Transfer Balance</Text>
-          </TouchableOpacity>
+          <View style={styles.buttonsContainer}>
+            {/* Transfer Balance Button */}
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.button}
+              onPress={() => router.push("/transfer")}
+            >
+              <FontAwesome
+                name="send"
+                size={28}
+                color="white"
+                style={styles.icon}
+              />
+              <Text style={styles.buttonText}>Transfer Balance</Text>
+            </TouchableOpacity>
 
-          {/* Withdraw Balance Button */}
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.button}
-            onPress={() => router.push("/withdraw")}
-          >
-            <FontAwesome
-              name="money"
-              size={28}
-              color="white"
-              style={styles.icon}
-            />
-            <Text style={styles.buttonText}>Withdraw Balance</Text>
-          </TouchableOpacity>
+            {/* Withdraw Balance Button */}
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.button}
+              onPress={() => router.push("/withdraw")}
+            >
+              <FontAwesome
+                name="money"
+                size={28}
+                color="white"
+                style={styles.icon}
+              />
+              <Text style={styles.buttonText}>Withdraw Balance</Text>
+            </TouchableOpacity>
 
-          {/* Transaction History Button */}
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={styles.button}
-            onPress={() => router.push("/transection")}
-          >
-            <FontAwesome
-              name="history"
-              size={28}
-              color="white"
-              style={styles.icon}
-            />
-            <Text style={styles.buttonText}>Transection History</Text>
-          </TouchableOpacity>
-        </View>
-      </ScrollView>
+            {/* Transaction History Button */}
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={styles.button}
+              onPress={() => router.push("/transection")}
+            >
+              <FontAwesome
+                name="history"
+                size={28}
+                color="white"
+                style={styles.icon}
+              />
+              <Text style={styles.buttonText}>Transection History</Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+      )}
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };
@@ -127,8 +137,8 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#9D1F31",
-    height: 56, 
-    marginBottom: 14, 
+    height: 56,
+    marginBottom: 14,
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row",
@@ -138,10 +148,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     paddingHorizontal: 15,
-    elevation: 5, 
+    elevation: 5,
   },
   icon: {
-    marginRight: 10, 
+    marginRight: 10,
   },
   buttonText: {
     color: "#ffffff",

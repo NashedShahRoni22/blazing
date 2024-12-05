@@ -3,6 +3,7 @@ import { View, Dimensions } from "react-native";
 import { WebView } from "react-native-webview";
 import { useRoute } from "@react-navigation/native"; // Import useRoute
 import SplashScreen from "../../components/SplashScreen";
+import { StatusBar } from "expo-status-bar";
 
 const storyDetails = () => {
   const { id } = useRoute().params; // Use useRoute() to get route parameters
@@ -97,6 +98,7 @@ const storyDetails = () => {
         javaScriptEnabled={true}
         scrollEnabled={false}
       />
+      <StatusBar style="light" />
     </View>
   );
 };

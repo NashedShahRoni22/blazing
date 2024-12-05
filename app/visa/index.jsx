@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import Images from "../../constants/Images";
 import { router } from "expo-router";
 import SplashScreen from "../../components/SplashScreen";
+import { StatusBar } from "expo-status-bar";
 
 const index = () => {
   const url = "https://nw71.tv/api/v1/visa-types";
@@ -66,6 +67,7 @@ const index = () => {
           ))}
         </View>
       )}
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

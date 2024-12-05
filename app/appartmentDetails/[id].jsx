@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import SplashScreen from "../../components/SplashScreen";
 import WebView from "react-native-webview";
+import { StatusBar } from "expo-status-bar";
 
 const appartmentDetails = () => {
   const { id } = useLocalSearchParams();
@@ -106,6 +107,7 @@ const appartmentDetails = () => {
         javaScriptEnabled={true}
         scrollEnabled={false}
       />
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

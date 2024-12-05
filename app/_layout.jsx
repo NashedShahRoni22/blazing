@@ -12,8 +12,8 @@ const screenOptions = {
 const screens = [
   { name: 'visa/index', headerTitle: 'Visa Services' },
   { name: 'country/[id]', headerTitle: 'Countries' },
-  { name: 'university/[visa_id]/[id]', headerTitle: 'Universities' },
-  { name: 'universityDetails/[id]', headerTitle: 'University Details' },
+  { name: 'university/[visa_id]/[id]', headerTitle: 'Visa' },
+  { name: 'universityDetails/[id]', headerTitle: 'Visa Details' },
   { name: 'appartment/index', headerTitle: 'Properties' },
   { name: 'appartmentDetails/[id]', headerTitle: 'Property Details' },
   { name: 'story/index', headerTitle: 'Success Story' },
@@ -31,6 +31,10 @@ const screens = [
   { name: 'transection/index', headerTitle: 'Transection History' },
   { name: 'transfer/index', headerTitle: 'Transfer Balance' },
   { name: 'withdraw/index', headerTitle: 'Withdraw Balance' },
+  { name: 'sale/index', headerTitle: 'Add Property' },
+  { name: 'addJob/index', headerTitle: 'Add Job' },
+  { name: 'fair/index', headerTitle: 'Fair' },
+  { name: 'fairDetails/[id]', headerTitle: 'Fair Details' },
   { name: 'coming_soon', headerTitle: 'Coming Soon' },
 ];
 

@@ -4,6 +4,7 @@ import { TouchableOpacity } from "react-native";
 import SplashScreen from "../../components/SplashScreen";
 import Images from "../../constants/Images";
 import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
 const index = () => {
   const url = "https://nw71.tv/api/v1/success-story";
@@ -55,7 +56,7 @@ const index = () => {
                   style={{
                     fontSize: 14,
                     fontFamily: "Montserrat_600SemiBold",
-                    marginVertical: 5
+                    marginVertical: 5,
                   }}
                 >
                   {item?.name}
@@ -92,6 +93,7 @@ const index = () => {
           }}
         />
       )}
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

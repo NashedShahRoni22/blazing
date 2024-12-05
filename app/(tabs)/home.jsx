@@ -3,6 +3,7 @@ import React from "react";
 import { TouchableOpacity } from "react-native";
 import Images from "../../constants/Images";
 import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
 const Home = () => {
   const DATA = [
@@ -29,7 +30,7 @@ const Home = () => {
     {
       image: Images.fair,
       title: "Blazing Fair",
-      link: "coming_soon",
+      link: "fair",
     },
     {
       image: Images.success,
@@ -61,7 +62,8 @@ const Home = () => {
             backgroundColor: "#9D1F31",
             flexDirection: "row",
             alignItems: "center",
-            paddingVertical: 30,
+            paddingTop:70,
+            paddingBottom:35,
             paddingHorizontal: 20,
             justifyContent: "space-between",
           }}
@@ -139,6 +141,7 @@ const Home = () => {
           </View>
         </View>
       </ScrollView>
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

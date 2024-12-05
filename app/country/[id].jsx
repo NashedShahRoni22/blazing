@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import Images from "../../constants/Images";
 import SplashScreen from "../../components/SplashScreen";
+import { StatusBar } from "expo-status-bar";
 const country = () => {
   const { id } = useLocalSearchParams();
   const url = `https://nw71.tv/api/v1/visa-countries/${id}`;
@@ -52,7 +53,7 @@ const country = () => {
               >
                 <Image source={Images?.country} style={{height:48, width:48}} />
                 <Text
-                  style={{ fontSize: 14,fontFamily: "Montserrat_600SemiBold"}}
+                  style={{ fontSize: 14,fontFamily: "Montserrat_600SemiBold", flexDirection: "row", flex:1}}
                 >
                   {item?.country_name}
                 </Text>
@@ -61,6 +62,7 @@ const country = () => {
           }}
         />
       )}
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };

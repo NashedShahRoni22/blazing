@@ -1,6 +1,7 @@
 import { View, Text, SafeAreaView, FlatList, StyleSheet } from "react-native";
 import React, { useEffect, useState } from "react";
 import SplashScreen from "../../components/SplashScreen";
+import { StatusBar } from "expo-status-bar";
 
 const index = () => {
   const [data, setData] = useState([]);
@@ -81,6 +82,7 @@ const index = () => {
           }}
         />
       )}
+      <StatusBar style="light" />
     </SafeAreaView>
   );
 };
