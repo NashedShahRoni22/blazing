@@ -12,7 +12,7 @@ import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
 const Index = () => {
-  const [propertyType, setPropertyType] = useState(3);
+  const [propertyType, setPropertyType] = useState(1);
   const [loader, setLoader] = useState(true);
   const [properties, setProperties] = useState([]);
   const url = `https://nw71.tv/api/v1/property?type=${propertyType}`;

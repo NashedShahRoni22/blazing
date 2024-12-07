@@ -4,18 +4,19 @@ import { TouchableOpacity } from "react-native";
 import SplashScreen from "../../components/SplashScreen";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { Ionicons } from "@expo/vector-icons";
 
 const index = () => {
-  const url = "https://nw71.tv/api/v1/job";
+  const url = "https://nw71.tv/api/v1/faqs?type=job_board";
   const [loader, setLoader] = useState(true);
-  const [jobs, setJobs] = useState([]);
+  const [faqs, setFaqs] = useState([]);
 
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         if (data?.status === "success") {
-          setJobs(data?.data);
+          setFaqs(data?.data);
         } else {
           console.log("Something went wrong");
         }
@@ -33,7 +34,7 @@ const index = () => {
           height: 56,
           justifyContent: "center",
           alignItems: "center",
-          borderRadius: 12,
+          borderRadius: 5,
           shadowColor: "#000",
           shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 0.1,
@@ -53,90 +54,71 @@ const index = () => {
           Add Job
         </Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={{
+          backgroundColor: "#9D1F31",
+          height: 56,
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 5,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+          marginBottom:10,
+        }}
+        onPress={() => router.push("/jobList")}
+      >
+        <Text
+          style={{
+            color: "white",
+            fontSize: 18,
+            fontFamily: "Montserrat_600SemiBold",
+            letterSpacing: 1,
+          }}
+        >
+          Job List
+        </Text>
+      </TouchableOpacity>
       {loader ? (
         <SplashScreen />
       ) : (
         <FlatList
-          data={jobs}
+          data={faqs}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => {
             return (
-              <View
+              <TouchableOpacity
                 style={{
-                  padding: 10,
+                  padding: 15,
                   backgroundColor: "white",
                   borderRadius: 10,
                   marginBottom: 10,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                   shadowColor: "#000",
                   shadowOffset: { width: 0, height: 2 },
                   shadowOpacity: 0.1,
                   shadowRadius: 4,
                 }}
+                onPress={() => router.push(`/faqDetails/${item?.id}`)}
               >
                 <Text
                   style={{
                     fontSize: 14,
                     fontFamily: "Montserrat_600SemiBold",
+                    flexDirection: "row",
+                    flex: 1,
                   }}
                 >
                   {item?.title}
                 </Text>
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "flex-end",
-                  }}
-                >
-                  <View>
-                    <Text
-                      style={{
-                        color: "#808080",
-                        fontSize: 12,
-                        marginVertical: 3,
-                        fontFamily: "Montserrat_400Regular",
-                      }}
-                    >
-                      {item?.area}
-                    </Text>
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        fontWeight: "600",
-                        fontFamily: "Montserrat_600SemiBold",
-                      }}
-                    >
-                      ${item?.salary}
-                    </Text>
-                  </View>
-                  <TouchableOpacity
-                    activeOpacity={0.7}
-                    style={{
-                      backgroundColor: "#9D1F31",
-                      height: 30,
-                      justifyContent: "center",
-                      alignItems: "center",
-                      borderRadius: 25,
-                      shadowColor: "#000",
-                      shadowOffset: { width: 0, height: 2 },
-                      shadowOpacity: 0.1,
-                      shadowRadius: 4,
-                      paddingHorizontal: 15,
-                    }}
-                    onPress={() => router.push(`/jobDetails/${item?.id}`)}
-                  >
-                    <Text
-                      style={{
-                        color: "white",
-                        fontSize: 10,
-                        fontFamily: "Montserrat_600SemiBold",
-                      }}
-                    >
-                      View Details
-                    </Text>
-                  </TouchableOpacity>
+                <View>
+                  <Ionicons name="chevron-down-outline" size={24} />
                 </View>
-              </View>
+              </TouchableOpacity>
             );
           }}
         />

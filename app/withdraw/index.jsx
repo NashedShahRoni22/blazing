@@ -10,10 +10,14 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import SplashScreen from "../../components/SplashScreen";
+import { Picker } from "@react-native-picker/picker";
+import { router } from "expo-router";
 
 const index = () => {
   const [formData, setFormData] = useState({
     amount: "",
+    withdraw_medium: "bkash", // Default to 'bkash'
+    withdraw_medium_number: "",
   });
 
   const [balance, setBalance] = useState("00.00");
@@ -40,6 +44,8 @@ const index = () => {
   const handleSubmit = () => {
     const dataToSubmit = {
       amount: formData.amount,
+      withdraw_medium: formData.withdraw_medium,
+      withdraw_medium_number: formData.withdraw_medium_number,
     };
 
     setLoading(true);
@@ -57,6 +63,7 @@ const index = () => {
         setLoading(false);
         if (data.status === "success") {
           alert("Withdrawal request successful");
+          router.push("/wallet");
         } else {
           alert("Withdrawal request failed: " + data.message);
         }
@@ -79,7 +86,10 @@ const index = () => {
   const isButtonDisabled = () => {
     const enteredAmount = parseFloat(formData.amount);
     return (
-      isNaN(enteredAmount) || enteredAmount <= 0 || enteredAmount > balance
+      isNaN(enteredAmount) ||
+      enteredAmount <= 0 ||
+      enteredAmount > balance ||
+      !formData.withdraw_medium_number
     );
   };
 
@@ -98,9 +108,40 @@ const index = () => {
           >
             Before withdrawal, please check again that the amount you want to
             withdraw is correct. Once the request is processed, it cannot be
-            canceled. For any wrong transactions, we are not liable.{" "}
+            canceled. For any wrong transactions, we are not liable.
           </Text>
 
+          {/* Withdraw Medium Dropdown */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Select Withdrawal Medium</Text>
+            <Picker
+              selectedValue={formData.withdraw_medium}
+              style={styles.picker}
+              onValueChange={(itemValue) => handleChange("withdraw_medium", itemValue)}
+            >
+              <Picker.Item label="bkash" value="bkash" />
+              <Picker.Item label="nagad" value="nagad" />
+              <Picker.Item label="other" value="other" />
+            </Picker>
+          </View>
+
+          {/* Withdraw Medium Number */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Enter Withdrawal Number</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Enter Withdrawal Number"
+              value={formData.withdraw_medium_number}
+              onChangeText={(text) => {
+                if (/^\d*$/.test(text)) {
+                  handleChange("withdraw_medium_number", text);
+                }
+              }}
+              keyboardType="numeric" // Ensure user inputs numbers only
+            />
+          </View>
+
+          {/* Amount Input */}
           <View style={styles.inputContainer}>
             <View style={styles.amountLabel}>
               <Text style={styles.label}>Enter Amount</Text>
@@ -122,6 +163,7 @@ const index = () => {
             />
           </View>
 
+          {/* Withdraw Button */}
           <TouchableOpacity
             activeOpacity={0.7}
             style={[styles.button, isButtonDisabled() && styles.buttonDisabled]} // Disable button if needed
@@ -169,6 +211,14 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     fontFamily: "Montserrat_400Regular",
     fontSize: 14,
+  },
+  picker: {
+    borderColor: "#ccc",
+    borderWidth: 1,
+    borderRadius: 8,
+    fontSize: 16,
+    marginBottom: 16,
+    fontFamily: "Montserrat_400Regular",
   },
   button: {
     backgroundColor: "#9D1F31",

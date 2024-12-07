@@ -56,7 +56,7 @@ const index = () => {
                     <Text
                       style={[
                         styles.statusText,
-                        { color: getStatusColor(item.status) }, // Status text color
+                        { color: getStatusColor(item.status) }, 
                       ]}
                     >
                       {item.status}
@@ -66,7 +66,7 @@ const index = () => {
                   <Text
                     style={[
                       styles.amountText,
-                      { color: getAmountColor(item.transaction_type) }, // Conditional color based on transaction_type
+                      { color: getAmountColor(item.transaction_type) }, 
                     ]}
                   >
                     ${item.amount}

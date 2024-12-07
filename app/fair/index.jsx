@@ -1,22 +1,22 @@
-import { View, Text, SafeAreaView, FlatList, StyleSheet } from "react-native";
+import { View, Text, SafeAreaView, FlatList } from "react-native";
 import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import SplashScreen from "../../components/SplashScreen";
 import { router } from "expo-router";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { StatusBar } from "expo-status-bar";
+import { Ionicons } from "@expo/vector-icons";
 
 const index = () => {
-  const url = "https://nw71.tv/api/v1/fairs";
+  const url = "https://nw71.tv/api/v1/faqs?type=fair";
   const [loader, setLoader] = useState(true);
-  const [fairs, setFairs] = useState([]);
+  const [faqs, setFaqs] = useState([]);
 
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
         if (data?.status === "success") {
-          setFairs(data?.data);
+          setFaqs(data?.data);
         } else {
           console.log("Something went wrong");
         }
@@ -26,30 +26,72 @@ const index = () => {
       });
   }, []);
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, padding: 10 }}>
+      <TouchableOpacity
+        activeOpacity={0.7}
+        style={{
+          backgroundColor: "#9D1F31",
+          height: 56,
+          justifyContent: "center",
+          alignItems: "center",
+          borderRadius: 5,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.1,
+          shadowRadius: 4,
+          marginBottom:10,
+        }}
+        onPress={() => router.push("/fairList")}
+      >
+        <Text
+          style={{
+            color: "white",
+            fontSize: 18,
+            fontFamily: "Montserrat_600SemiBold",
+            letterSpacing: 1,
+          }}
+        >
+          Fair List
+        </Text>
+      </TouchableOpacity>
       {loader ? (
         <SplashScreen />
       ) : (
         <FlatList
-          style={styles.flatList}
-          data={fairs}
+          data={faqs}
           showsHorizontalScrollIndicator={false}
           renderItem={({ item }) => {
             return (
-              <View style={styles.propertyCard}>
+              <TouchableOpacity
+                style={{
+                  padding: 15,
+                  backgroundColor: "white",
+                  borderRadius: 10,
+                  marginBottom: 10,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  shadowColor: "#000",
+                  shadowOffset: { width: 0, height: 2 },
+                  shadowOpacity: 0.1,
+                  shadowRadius: 4,
+                }}
+                onPress={() => router.push(`/faqDetails/${item?.id}`)}
+              >
+                <Text
+                  style={{
+                    fontSize: 14,
+                    fontFamily: "Montserrat_600SemiBold",
+                    flexDirection: "row",
+                    flex: 1,
+                  }}
+                >
+                  {item?.title}
+                </Text>
                 <View>
-                  <Text style={styles.propertyTitle}>{item?.title}</Text>
-                  <Text style={styles.propertyPrice}>${item?.apply_fee}</Text>
+                  <Ionicons name="chevron-down-outline" size={24} />
                 </View>
-                <View style={styles.viewDetailsButton}>
-                  <TouchableOpacity
-                    activeOpacity={0.7}
-                    onPress={() => router.push(`/fairDetails/${item?.id}`)}
-                  >
-                    <Text style={styles.viewDetailsText}>View Details</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
+              </TouchableOpacity>
             );
           }}
         />
@@ -58,51 +100,5 @@ const index = () => {
     </SafeAreaView>
   );
 };
-
-// Styles for buttons and other components
-const styles = StyleSheet.create({
-  flatList: {
-    padding: 10,
-  },
-  propertyCard: {
-    padding: 10,
-    backgroundColor: "white",
-    borderRadius: 10,
-    marginBottom: 10,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    flexDirection:"row",
-    justifyContent:"space-between",
-    alignItems:"center"
-  },
-  propertyTitle: {
-    fontSize: 16,
-    fontFamily: "Montserrat_600SemiBold",
-  },
-  propertyPrice: {
-    fontSize: 14,
-    fontFamily: "Montserrat_600SemiBold",
-    marginTop: 10,
-  },
-  viewDetailsButton: {
-    backgroundColor: "#9D1F31",
-    height: 30,
-    justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 25,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    paddingHorizontal: 15,
-  },
-  viewDetailsText: {
-    color: "white",
-    fontSize: 12,
-    fontFamily: "Montserrat_600SemiBold",
-  },
-});
 
 export default index;

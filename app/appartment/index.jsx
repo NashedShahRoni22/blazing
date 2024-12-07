@@ -13,33 +13,15 @@ import { StatusBar } from "expo-status-bar";
 import { Ionicons } from "@expo/vector-icons";
 
 const Index = () => {
-  const [propertyType, setPropertyType] = useState(2);
+  const [propertyType, setPropertyType] = useState("");
   const [loader, setLoader] = useState(true);
-  const [properties, setProperties] = useState([]);
   const [faqs, setFaqs] = useState([]);
-  const url = `https://nw71.tv/api/v1/property?type=${propertyType}`;
-  const faqUrl = "https://nw71.tv/api/v1/faqs?type=visa";
+  const faqUrl = "https://nw71.tv/api/v1/faqs?type=properties";
 
   const handlePress = (type) => {
     setPropertyType(type);
+    router.push(`/${type}`);
   };
-
-  // get property
-  useEffect(() => {
-    setLoader(true);
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.status === "success") {
-          setProperties(data?.data);
-        } else {
-          console.log("Something went wrong");
-        }
-      })
-      .finally(() => {
-        setLoader(false);
-      });
-  }, [propertyType]);
 
   // get faq
   useEffect(() => {
@@ -61,62 +43,57 @@ const Index = () => {
     <SafeAreaView style={styles.container}>
       {/* filter buttons  */}
       <View style={styles.buttonContainer}>
-        {/* Faq Button */}
-        <TouchableOpacity
-          style={[styles.button, propertyType === 4 && styles.selectedButton]}
-          onPress={() => handlePress(4)}
-        >
-          <Text
-            style={[
-              styles.buttonText,
-              propertyType === 4 && styles.selectedText,
-            ]}
-          >
-            FAQ
-          </Text>
-        </TouchableOpacity>
-        {/* Buy Button */}
-        <TouchableOpacity
-          style={[styles.button, propertyType === 1 && styles.selectedButton]}
-          onPress={() => handlePress(1)}
-        >
-          <Text
-            style={[
-              styles.buttonText,
-              propertyType === 1 && styles.selectedText,
-            ]}
-          >
-            Buy
-          </Text>
-        </TouchableOpacity>
-
         {/* Rent Button */}
         <TouchableOpacity
-          style={[styles.button, propertyType === 2 && styles.selectedButton]}
-          onPress={() => handlePress(2)}
+          style={[
+            styles.button,
+            propertyType === "rent" && styles.selectedButton,
+          ]}
+          onPress={() => handlePress("rent")}
         >
           <Text
             style={[
               styles.buttonText,
-              propertyType === 2 && styles.selectedText,
+              propertyType === "rent" && styles.selectedText,
             ]}
           >
             Rent
           </Text>
         </TouchableOpacity>
 
-        {/* Sale Button */}
+        {/* Buy Button */}
         <TouchableOpacity
-          style={[styles.button, propertyType === 3 && styles.selectedButton]}
-          onPress={() => handlePress(3)}
+          style={[
+            styles.button,
+            propertyType === "buy" && styles.selectedButton,
+          ]}
+          onPress={() => handlePress("buy")}
         >
           <Text
             style={[
               styles.buttonText,
-              propertyType === 3 && styles.selectedText,
+              propertyType === "buy" && styles.selectedText,
             ]}
           >
-            Sale
+            Buy
+          </Text>
+        </TouchableOpacity>
+
+        {/* Sale Button */}
+        <TouchableOpacity
+          style={[
+            styles.button,
+            propertyType === "sale" && styles.selectedButton,
+          ]}
+          onPress={() => handlePress("sale")}
+        >
+          <Text
+            style={[
+              styles.buttonText,
+              propertyType === "sale" && styles.selectedText,
+            ]}
+          >
+            Sell
           </Text>
         </TouchableOpacity>
       </View>
@@ -124,109 +101,45 @@ const Index = () => {
       {loader ? (
         <SplashScreen />
       ) : (
-        <>
-          {propertyType === 3 && (
-            <View style={{ padding: 5 }}>
+        <FlatList
+          data={faqs}
+          style={{ padding: 5 }}
+          showsHorizontalScrollIndicator={false}
+          renderItem={({ item }) => {
+            return (
               <TouchableOpacity
-                activeOpacity={0.7}
                 style={{
-                  backgroundColor: "#9D1F31",
-                  height: 56,
-                  justifyContent: "center",
+                  padding: 15,
+                  backgroundColor: "white",
+                  borderRadius: 10,
+                  marginBottom: 10,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
                   alignItems: "center",
-                  borderRadius: 12,
                   shadowColor: "#000",
-                  shadowOffset: { width: 0, height: 4 },
+                  shadowOffset: { width: 0, height: 2 },
                   shadowOpacity: 0.1,
                   shadowRadius: 4,
                 }}
-                onPress={() => router.push("/sale")}
+                onPress={() => router.push(`/faqDetails/${item?.id}`)}
               >
                 <Text
                   style={{
-                    color: "white",
-                    fontSize: 18,
+                    fontSize: 14,
                     fontFamily: "Montserrat_600SemiBold",
-                    letterSpacing: 1,
+                    flexDirection: "row",
+                    flex: 1,
                   }}
                 >
-                  Add Property
+                  {item?.title}
                 </Text>
-              </TouchableOpacity>
-            </View>
-          )}
-          {/* faq list  */}
-          {propertyType === 4 && (
-            <FlatList
-              data={faqs}
-              style={{ padding: 5 }}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({ item }) => {
-                return (
-                  <TouchableOpacity
-                    style={{
-                      padding: 15,
-                      backgroundColor: "white",
-                      borderRadius: 10,
-                      marginBottom: 10,
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      shadowColor: "#000",
-                      shadowOffset: { width: 0, height: 2 },
-                      shadowOpacity: 0.1,
-                      shadowRadius: 4,
-                    }}
-                    onPress={() => router.push(`/faqDetails/${item?.id}`)}
-                  >
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        fontFamily: "Montserrat_600SemiBold",
-                        flexDirection: "row",
-                        flex: 1,
-                      }}
-                    >
-                      {item?.title}
-                    </Text>
-                    <View>
-                      <Ionicons name="chevron-down-outline" size={24} />
-                    </View>
-                  </TouchableOpacity>
-                );
-              }}
-            />
-          )}
-
-          {/* property list  */}
-          <FlatList
-            style={styles.flatList}
-            data={properties}
-            showsHorizontalScrollIndicator={false}
-            renderItem={({ item }) => (
-              <View style={styles.propertyCard}>
-                <Text style={styles.propertyTitle}>{item?.title}</Text>
-                <View style={styles.propertyDetails}>
-                  <View>
-                    <Text style={styles.propertyArea}>{item?.area}</Text>
-                    <Text style={styles.propertyPrice}>${item?.price}</Text>
-                  </View>
-                  <View style={styles.viewDetailsButton}>
-                    <TouchableOpacity
-                      activeOpacity={0.7}
-                      onPress={() =>
-                        router.push(`/appartmentDetails/${item?.id}`)
-                      }
-                    >
-                      <Text style={styles.viewDetailsText}>View Details</Text>
-                    </TouchableOpacity>
-                  </View>
+                <View>
+                  <Ionicons name="chevron-down-outline" size={24} />
                 </View>
-              </View>
-            )}
-            keyExtractor={(item) => item.id.toString()}
-          />
-        </>
+              </TouchableOpacity>
+            );
+          }}
+        />
       )}
 
       <StatusBar style="light" />
