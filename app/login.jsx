@@ -4,8 +4,29 @@ import Images from "../constants/Images";
 import { TouchableOpacity } from "react-native";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import useGoogleAuth from "../components/GoogleAuth";
 
 const Login = () => {
+  const { promptAsync, request } = useGoogleAuth();
+  const handleAuth = async () => {
+    const result = await promptAsync();
+    if (result.type === "success") {
+      const { id_token } = result.authentication; // Extract the token
+      const userInfo = {
+        idToken: id_token,
+        name: "John Doe", // Replace with actual data from token
+        email: "johndoe@example.com", // Replace with actual data from token
+        picture: "https://example.com/johndoe.jpg", // Replace with actual data from token
+      };
+
+      // Send the data (including token) to your server
+      await fetch("http://your-server-url/save-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userInfo),
+      });
+    }
+  };
   return (
     <SafeAreaView
       style={{
@@ -39,7 +60,9 @@ const Login = () => {
             shadowOpacity: 0.1,
             shadowRadius: 4,
           }}
-          onPress={() => router.push("/home")}
+          // onPress={() => router.push("/home")}
+          disabled={!request}
+          onPress={() => promptAsync()}
         >
           <Image source={Images.google} />
           <Text

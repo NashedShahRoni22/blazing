@@ -9,7 +9,6 @@ const index = () => {
   const url = "https://nw71.tv/api/v1/job";
   const [loader, setLoader] = useState(true);
   const [jobs, setJobs] = useState([]);
-  log
 
   useEffect(() => {
     fetch(url)

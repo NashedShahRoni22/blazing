@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "blazing",
-    "slug": "blazing",
+    "name": "mohpro",
+    "slug": "mohpro",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    // "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.nsr_arvi.blazing"
+      "package": "com.mohpro.app"
     },
     "web": {
       "bundler": "metro",
@@ -29,7 +29,8 @@
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      "expo-secure-store"
     ],
     "experiments": {
       "typedRoutes": true
@@ -39,9 +40,9 @@
         "origin": false
       },
       "eas": {
-        "projectId": "4b3526e7-7331-4088-9eb0-0018c950115f"
+        "projectId": "c7c1ecf7-c474-41a1-8e5b-04da1811975a"
       }
     },
-    "owner": "nsr_arvi"
+    "owner": "mohpro"
   }
 }

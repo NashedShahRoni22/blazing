@@ -1,12 +1,12 @@
 {
-  "name": "blazing",
+  "name": "mohpro",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
-    "android": "expo start --android",
-    "ios": "expo start --ios",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
     "lint": "expo lint"
@@ -18,10 +18,13 @@
     "@expo-google-fonts/montserrat": "^0.2.3",
     "@expo/vector-icons": "^14.0.2",
     "@react-native-community/datetimepicker": "^8.2.0",
+    "@react-native-google-signin/google-signin": "^13.1.0",
     "@react-native-picker/picker": "^2.9.0",
     "@react-navigation/native": "^7.0.0",
     "expo": "~52.0.11",
+    "expo-auth-session": "~6.0.1",
     "expo-constants": "~17.0.3",
+    "expo-crypto": "~14.0.1",
     "expo-dev-client": "~5.0.4",
     "expo-font": "~13.0.1",
     "expo-linear-gradient": "^14.0.1",
@@ -42,7 +45,9 @@
     "react-native-screens": "^4.0.0",
     "react-native-snap-carousel": "^3.9.1",
     "react-native-web": "~0.19.10",
-    "react-native-webview": "^13.12.2"
+    "react-native-webview": "^13.12.2",
+    "undefined": "expo-auth-session/providers/google",
+    "expo-secure-store": "~14.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
